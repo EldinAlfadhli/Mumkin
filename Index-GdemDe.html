@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="pageTitle">مركز ممكن - الصفحة الرئيسية</title>
+    <!-- تضمين Tailwind CSS مباشرة من CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- تضمين خط Cairo من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- تضمين Font Awesome للرموز -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- مكتبة AOS للرسوم المتحركة -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* تعريف الخط الأساسي لتطبيق Cairo على كامل الصفحة */
+        body {
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth; /* تفعيل التمرير السلس */
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        /* تلوين شريط التمرير (لتحسين الجمالية) */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #059669, #10b981);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #047857, #059669);
+        }
+
+        /* تحسينات إضافية لأزرار CTA */
+        .cta-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* تأثيرات على أيقونات التواصل الاجتماعي */
+        .social-icons a {
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #f97316;
+        }
+        
+        /* تأثيرات على البطاقات */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #10b981;
+        }
+        
+        /* تدرج ألوان للرأس (أزرق سماوي فاتح) */
+        .header-gradient-bg {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* تدرج ألوان لقسم الأبطال (أبيض شفاف للخلفية الفاتحة) */
+        .hero-overlay-gradient {
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.85) 0%, rgba(240, 253, 244, 0.85) 100%);
+        }
+
+        /* تأثيرات الشريط المتحرك في قسم الأبطال */
+        .strength-bar-animation {
+            animation: slide 25s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* زر العودة للأعلى */
+        #scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        }
+        #scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* تنسيق لتأثيرات الصور */
+        .hover-zoom {
+            transition: transform 0.4s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .hover-zoom:hover {
+            transform: scale(1.05);
+        }
+        
+        /* تأثيرات القسم */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2.5rem;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #059669, #10b981);
+            border-radius: 2px;
+        }
+        
+        /* تأثيرات البطاقات في قسم المقالات */
+        .article-card {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* تأثيرات فريق العمل */
+        .team-member {
+            transition: all 0.4s ease;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* تأثيرات قسم الأسئلة الشائعة */
+        .faq-item {
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* تأثيرات قسم العملاء */
+        .testimonial-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* تدرج ألوان لقسم الاتصال */
+        .contact-gradient {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border-radius: 25px;
+            overflow: hidden;
+        }
+        
+        /* تأثيرات النموذج */
+        .form-input {
+            transition: all 0.3s ease;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+        }
+        .form-input:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+        
+        /* تأثيرات الشعار */
+        .logo-container {
+            transition: all 0.3s ease;
+        }
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+        
+        /* تأثيرات التحميل */
+        .loading-spinner {
+            display: none;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* تأثيرات القسم النشط في القائمة */
+        .nav-active {
+            color: #059669;
+            font-weight: bold;
+            position: relative;
+        }
+        .nav-active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #059669, #10b981);
+            border-radius: 2px;
+        }
+        
+        /* تأثيرات شريط التقدم */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #059669, #10b981);
+            z-index: 1000;
+        }
+
+        /* Language switcher styles */
+        .language-switcher select {
+            /* Basic styling for the dropdown */
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem; /* rounded-lg */
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            color: #10b981; /* text-emerald-600 */
+            appearance: none; /* Remove default arrow */
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%2310b981" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position: left 0.75rem center; /* Adjust for RTL */
+            background-size: 1.5em;
+            padding-right: 2.5rem; /* Space for the custom arrow in RTL */
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        html[dir="ltr"] .language-switcher select {
+            background-position: right 0.75rem center; /* Adjust for LTR */
+            padding-left: 1rem;
+            padding-right: 2.5rem; /* Space for the custom arrow in LTR */
+        }
+        
+        .language-switcher select:focus {
+            outline: none;
+            border-color: #059669;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 relative">
+
+    <!-- شريط تقدم التمرير -->
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <!-- رأس الصفحة (Header) -->
+    <header class="header-gradient-bg text-gray-800 p-4 shadow-lg sticky top-0 z-50 rounded-b-xl">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+            <!-- شعار مركز ممكن -->
+            <div class="flex items-center space-x-3 rtl:space-x-reverse mb-4 md:mb-0 logo-container" data-aos="fade-right">
+                <!-- صورة الشعار -->
+                <div class="bg-emerald-600 rounded-full p-2 shadow-md">
+                    <!-- تم تحديث مسار الصورة للإشارة إلى ملف محلي -->
+                    <img src="logo.png" alt="شعار مركز ممكن" class="h-10 w-10">
+                </div>
+                <span class="text-3xl font-black tracking-wide text-emerald-700" data-key="logoText">مركز <span class="text-orange-500">ممكن</span></span>
+            </div>
+
+            <!-- قائمة التنقل الرئيسية -->
+            <nav class="flex-grow flex justify-center md:justify-end" data-aos="fade-left">
+                <ul class="hidden md:flex flex-wrap justify-center md:space-x-8 rtl:space-x-reverse text-lg">
+                    <li><a href="#home" class="flex items-center p-2 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition-all duration-300 nav-active"><i class="fas fa-home ml-2 rtl:mr-2"></i> <span data-key="navHome">الرئيسية</span></a></li>
+                    <li><a href="#services" class="flex items-center p-2 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition-all duration-300"><i class="fas fa-concierge-bell ml-2 rtl:mr-2"></i> <span data-key="navServices">خدماتنا</span></a></li>
+                    <li><a href="#news" class="flex items-center p-2 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition-all duration-300"><i class="fas fa-newspaper ml-2 rtl:mr-2"></i> <span data-key="navNews">الأخبار</span></a></li>
+                    <li><a href="#articles" class="flex items-center p-2 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition-all duration-300"><i class="fas fa-file-alt ml-2 rtl:mr-2"></i> <span data-key="navArticles">المقالات</span></a></li>
+                    <li><a href="#faq" class="flex items-center p-2 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg transition-all duration-300"><i class="fas fa-question-circle ml-2 rtl:mr-2"></i> <span data-key="navFaq">الأسئلة الشائعة</span></a></li>
+                    <li><a href="#contact" class="flex items-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-2 px-5 rounded-full transition-all duration-300 shadow-md transform hover:scale-105 cta-button"><i class="fas fa-envelope ml-2 rtl:mr-2"></i> <span data-key="navContactBtn">اتصل بنا</span></a></li>
+                </ul>
+                
+                <!-- قائمة هامبرجر للجوال -->
+                <button id="mobile-menu-button" class="md:hidden text-3xl text-emerald-700">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+
+            <!-- Language Switcher and Social Icons -->
+            <div class="flex items-center space-x-4 rtl:space-x-reverse mt-4 md:mt-0">
+                <!-- Language Switcher -->
+                <div class="language-switcher relative">
+                    <select id="language-select" class="block py-2 px-4 pr-10 rtl:pl-10 rtl:pr-4 text-emerald-600 font-semibold rounded-lg border-2 border-emerald-300 focus:ring-emerald-500 focus:border-emerald-500">
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                        <option value="fi">Suomi</option>
+                    </select>
+                    <!-- Custom arrow icon for the select box -->
+                    <div class="pointer-events-none absolute inset-y-0 left-0 rtl:right-0 flex items-center px-2 text-emerald-600">
+                        <i class="fas fa-globe text-xl"></i>
+                    </div>
+                </div>
+
+                <!-- أيقونات التواصل الاجتماعي في الرأس (مخفية على الشاشات الصغيرة) -->
+                <div class="hidden md:flex social-icons text-2xl space-x-4 rtl:space-x-reverse mr-4">
+                    <a href="#" class="text-emerald-600 hover:text-orange-500 transition-colors duration-300"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-emerald-600 hover:text-orange-500 transition-colors duration-300"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="text-emerald-600 hover:text-orange-500 transition-colors duration-300"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="text-emerald-600 hover:text-orange-500 transition-colors duration-300"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="text-emerald-600 hover:text-orange-500 transition-colors duration-300"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- القائمة المتنقلة (للجوال) -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 bg-gradient-to-r from-emerald-600 to-green-700 rounded-lg p-4">
+            <ul class="space-y-3 text-center text-white">
+                <li><a href="#home" class="block p-3 hover:bg-white hover:text-emerald-600 rounded-lg transition-all duration-300"><i class="fas fa-home ml-2 rtl:mr-2"></i> <span data-key="navHome">الرئيسية</span></a></li>
+                <li><a href="#services" class="block p-3 hover:bg-white hover:text-emerald-600 rounded-lg transition-all duration-300"><i class="fas fa-concierge-bell ml-2 rtl:mr-2"></i> <span data-key="navServices">خدماتنا</span></a></li>
+                <li><a href="#news" class="block p-3 hover:bg-white hover:text-emerald-600 rounded-lg transition-all duration-300"><i class="fas fa-newspaper ml-2 rtl:mr-2"></i> <span data-key="navNews">الأخبار</span></a></li>
+                <li><a href="#articles" class="block p-3 hover:bg-white hover:text-emerald-600 rounded-lg transition-all duration-300"><i class="fas fa-file-alt ml-2 rtl:mr-2"></i> <span data-key="navArticles">المقالات</span></a></li>
+                <li><a href="#faq" class="block p-3 hover:bg-white hover:text-emerald-600 rounded-lg transition-all duration-300"><i class="fas fa-question-circle ml-2 rtl:mr-2"></i> <span data-key="navFaq">الأسئلة الشائعة</span></a></li>
+                <li><a href="#contact" class="block p-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full transition-all duration-300 shadow-md cta-button"><i class="fas fa-envelope ml-2 rtl:mr-2"></i> <span data-key="navContactBtn">اتصل بنا</span></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- قسم الأبطال (Hero Section) -->
+    <section class="hero relative h-screen bg-cover bg-center flex items-center justify-center text-gray-900" id="home" style="background-image: url('https://images.unsplash.com/photo-1596526131078-009778216170?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <!-- طبقة شفافة لتعتيم الصورة وتحسين قراءة النص -->
+        <div class="absolute inset-0 hero-overlay-gradient"></div>
+        <div class="hero-content relative z-10 text-center p-8 bg-white bg-opacity-80 rounded-3xl shadow-2xl max-w-4xl mx-auto backdrop-blur-sm border border-emerald-100" data-aos="fade-up">
+            <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-white px-6 py-2 rounded-full font-bold shadow-lg" data-key="heroBadge">
+                <i class="fas fa-star mr-2"></i>المركز الأول في فنلندا
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black mb-4 text-emerald-800 leading-tight">
+                <span data-key="heroTitlePart1">مركز</span> <span class="text-orange-500" data-key="heroTitlePart2">ممكن</span> <span data-key="heroTitlePart3">لحول الترجمة والخدمات القانونية</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 leading-relaxed text-gray-700 max-w-3xl mx-auto" data-key="heroSubtitle">
+                الخبرة والدقة والسرعة في خدمات الترجمة المعتمدة والاستشارات القانونية مع فريق من المحترفين يضمن لك حلولاً مثالية لجميع احتياجاتك
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#services" class="cta-button bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+                    <span data-key="heroDiscoverBtn">اكتشف خدماتنا</span> <i class="fas fa-arrow-down ml-2 rtl:mr-2"></i>
+                </a>
+                <a href="#contact" class="cta-button bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+                    <span data-key="heroBookBtn">احجز استشارة</span> <i class="fas fa-calendar ml-2 rtl:mr-2"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- شريط نقاط القوة المتحرك -->
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-emerald-600 to-green-700 py-3 overflow-hidden">
+            <div class="strength-bar-animation flex space-x-12 rtl:space-x-reverse text-lg font-semibold whitespace-nowrap text-white">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-white mr-2"></i>
+                    <span data-key="strength1">ترجمة معتمدة من وزارة العدل</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-white mr-2"></i>
+                    <span data-key="strength2">فريق محترف متعدد اللغات</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-white mr-2"></i>
+                    <span data-key="strength3">استشارات قانونية متخصصة</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-white mr-2"></i>
+                    <span data-key="strength4">سرية تامة في التعاملات</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-white mr-2"></i>
+                    <span data-key="strength5">دعم عملاء على مدار الساعة</span>
+                </div>
+                <!-- كرر لإضافة تأثير التمرير المستمر -->
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-white mr-2"></i>
+                    <span data-key="strength1">ترجمة معتمدة من وزارة العدل</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-white mr-2"></i>
+                    <span data-key="strength2">فريق محترف متعدد اللغات</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-white mr-2"></i>
+                    <span data-key="strength3">استشارات قانونية متخصصة</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-white mr-2"></i>
+                    <span data-key="strength4">سرية تامة في التعاملات</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-white mr-2"></i>
+                    <span data-key="strength5">دعم عملاء على مدار الساعة</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- إحصائيات سريعة -->
+    <section class="py-12 bg-gradient-to-r from-emerald-600 to-green-700 text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl font-bold mb-2" data-key="stat1Num">+10,000</div>
+                    <div class="text-lg" data-key="stat1Text">مستند تمت ترجمته</div>
+                </div>
+                <div class="p-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl font-bold mb-2" data-key="stat2Num">+5,000</div>
+                    <div class="text-lg" data-key="stat2Text">عميل راضٍ عن خدماتنا</div>
+                </div>
+                <div class="p-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl font-bold mb-2" data-key="stat3Num">+15</div>
+                    <div class="text-lg" data-key="stat3Text">خبير في فريقنا</div>
+                </div>
+                <div class="p-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-4xl font-bold mb-2" data-key="stat4Num">+20</div>
+                    <div class="text-lg" data-key="stat4Text">لغة متوفرة للترجمة</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم خدماتنا -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-emerald-600" data-key="servicesTitle">خدماتنا المتكاملة</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="servicesSubtitle">نقدم مجموعة واسعة من خدمات الترجمة والاستشارات القانونية بمعايير عالمية تلبي جميع احتياجاتك</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- بطاقة خدمة 1 -->
+                <div class="service-card bg-white" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-8">
+                        <div class="w-16 h-16 bg-gradient-to-r from-emerald-600 to-green-700 text-white rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-language text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4" data-key="service1Title">الترجمة المعتمدة</h3>
+                        <p class="text-gray-600 mb-6" data-key="service1Desc">ترجمة معتمدة من وزارة العدل لجميع المستندات الرسمية والوثائق القانونية مع ضمان الدقة والسرية التامة.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service1Item1">شهادات الميلاد والزواج</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service1Item2">العقود والاتفاقيات</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service1Item3">المستندات المالية والقضائية</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service1Item4">الوثائق التعليمية</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700">
+                            <span data-key="learnMore">تعرف على المزيد</span>
+                            <i class="fas fa-arrow-left ml-2 rtl:mr-2 animate-pulse"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- بطاقة خدمة 2 -->
+                <div class="service-card bg-white" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-8">
+                        <div class="w-16 h-16 bg-gradient-to-r from-emerald-600 to-green-700 text-white rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-balance-scale text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4" data-key="service2Title">الاستشارات القانونية</h3>
+                        <p class="text-gray-600 mb-6" data-key="service2Desc">استشارات قانونية متخصصة في مجالات الهجرة، العقارات، التجارة الدولية، وحل النزاعات من قبل محامين متخصصين.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service2Item1">استشارات هجرة وإقامة</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service2Item2">عقود العمل والتجارة</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service2Item3">تمثيل قانوني في المحاكم</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service2Item4">حل النزاعات التجارية</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700">
+                            <span data-key="learnMore">تعرف على المزيد</span>
+                            <i class="fas fa-arrow-left ml-2 rtl:mr-2 animate-pulse"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- بطاقة خدمة 3 -->
+                <div class="service-card bg-white" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-8">
+                        <div class="w-16 h-16 bg-gradient-to-r from-emerald-600 to-green-700 text-white rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-file-signature text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4" data-key="service3Title">توثيق المستندات</h3>
+                        <p class="text-gray-600 mb-6" data-key="service3Desc">خدمات توثيق وإصدار مستندات رسمية معترف بها دولياً، مع ضمان السرعة والدقة في الإنجاز.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service3Item1">توثيق التوقيعات</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service3Item2">تصديق المستندات الرسمية</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service3Item3">توثيق العقود والاتفاقيات</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                <span data-key="service3Item4">توثيق الشهادات التعليمية</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700">
+                            <span data-key="learnMore">تعرف على المزيد</span>
+                            <i class="fas fa-arrow-left ml-2 rtl:mr-2 animate-pulse"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأخبار -->
+    <section id="news" class="py-20 bg-gradient-to-br from-gray-50 to-emerald-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-emerald-600" data-key="newsTitle">آخر الأخبار والتحديثات</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="newsSubtitle">تابع آخر المستجدات في عالم الترجمة والقوانين الدولية</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- بطاقة خبر 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="خبر" class="w-full h-56 object-cover hover-zoom">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="inline-block bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full" data-key="newsCategory1">ترجمة</span>
+                            <span class="text-gray-500 text-sm"><i class="far fa-calendar mr-1"></i> 15 مايو 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3" data-key="newsTitle1">تحديثات جديدة في متطلبات الترجمة المعتمدة</h3>
+                        <p class="text-gray-600 mb-4" data-key="newsDesc1">أعلنت وزارة العدل عن تحديثات جديدة في متطلبات الترجمة المعتمدة بدءاً من الشهر القادم، مما يسهل إجراءات الترجمة للمستندات الرسمية.</p>
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 font-medium flex items-center">
+                            <span data-key="readMore">قراءة المزيد</span> 
+                            <i class="fas fa-arrow-left ml-2 rtl:mr-2 animate-pulse"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- بطاقة خبر 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="خبر" class="w-full h-56 object-cover hover-zoom">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="inline-block bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full" data-key="newsCategory2">قانوني</span>
+                            <span class="text-gray-500 text-sm"><i class="far fa-calendar mr-1"></i> 8 مايو 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3" data-key="newsTitle2">تغييرات في قانون الهجرة الفنلندي للعام 2025</h3>
+                        <p class="text-gray-600 mb-4" data-key="newsDesc2">أصدرت الحكومة الفنلندية مجموعة من التعديلات على قانون الهجرة ستطبق اعتباراً من يوليو 2025، مما سيؤثر على إجراءات الهجرة والتأشيرات.</p>
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 font-medium flex items-center">
+                            <span data-key="readMore">قراءة المزيد</span> 
+                            <i class="fas fa-arrow-left ml-2 rtl:mr-2 animate-pulse"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- بطاقة خبر 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="خبر" class="w-full h-56 object-cover hover-zoom">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="inline-block bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full" data-key="newsCategory3">أحداث</span>
+                            <span class="text-gray-500 text-sm"><i class="far fa-calendar mr-1"></i> 2 مايو 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3" data-key="newsTitle3">مركز ممكن يشارك في معرض الخدمات القانونية الدولي</h3>
+                        <p class="text-gray-600 mb-4" data-key="newsDesc3">شارك مركز ممكن في فعاليات معرض الخدمات القانونية الدولي الذي أقيم في هلسنكي الأسبوع الماضي، حيث قدم أحدث حلول الترجمة القانونية.</p>
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 font-medium flex items-center">
+                            <span data-key="readMore">قراءة المزيد</span> 
+                            <i class="fas fa-arrow-left ml-2 rtl:mr-2 animate-pulse"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">
+                <a href="#" class="inline-flex items-center bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg">
+                    <span data-key="viewAllNews">تصفح جميع الأخبار</span>
+                    <i class="fas fa-arrow-left ml-2 rtl:mr-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المقالات -->
+    <section id="articles" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-emerald-600" data-key="articlesTitle">مقالات مختارة</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="articlesSubtitle">اكتشف مقالاتنا المفيدة حول الترجمة والقوانين الدولية</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- المقال الرئيسي -->
+                <div class="lg:w-2/3" data-aos="fade-right">
+                    <div class="article-card bg-gradient-to-r from-emerald-600 to-green-700 rounded-2xl overflow-hidden shadow-xl">
+                        <div class="p-8 text-white">
+                            <span class="inline-block bg-emerald-700 bg-opacity-50 text-white text-sm font-semibold px-3 py-1 rounded-full mb-4" data-key="articleCategoryMain">دليل شامل</span>
+                            <h3 class="text-3xl font-bold mb-4" data-key="articleTitleMain">دليل المبتدئين للترجمة القانونية المعتمدة</h3>
+                            <p class="text-lg mb-6" data-key="articleDescMain">الترجمة القانونية تتطلب دقة عالية ومعرفة متخصصة. في هذا المقال نستعرض أهم النصائح والمتطلبات للحصول على ترجمة معتمدة صحيحة تفي بجميع الشروط القانونية.</p>
+                            <div class="flex items-center">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="كاتب" class="w-12 h-12 rounded-full mr-3 border-2 border-white">
+                                <div>
+                                    <div class="font-bold" data-key="authorName1">محمد أحمد</div>
+                                    <div class="text-sm text-emerald-100" data-key="authorTitle1">مترجم قانوني معتمد</div>
+                                </div>
+                                <a href="#" class="ml-auto bg-white text-emerald-700 font-bold py-2 px-4 rounded-full hover:bg-gray-100 transition-all">
+                                    <span data-key="readArticle">اقرأ المقال</span>
+                                    <i class="fas fa-arrow-left ml-2 rtl:mr-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- قائمة المقالات الجانبية -->
+                <div class="lg:w-1/3 space-y-6" data-aos="fade-left">
+                    <div class="article-card bg-white p-6 rounded-2xl shadow-md">
+                        <span class="inline-block bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full mb-3" data-key="articleCategory2">نصائح</span>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3" data-key="articleTitle2">كيف تختار مكتب ترجمة معتمد؟</h4>
+                        <p class="text-gray-600 mb-4" data-key="articleDesc2">دليل شامل لاختيار أفضل مكتب ترجمة معتمد يناسب احتياجاتك ويضمن لك جودة ودقة الترجمة.</p>
+                        <a href="#" class="text-emerald-600 font-bold hover:text-emerald-700 flex items-center">
+                            <span data-key="readArticle">قراءة المقال</span> 
+                            <i class="fas fa-arrow-left ml-2 rtl:mr-2 animate-pulse"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="article-card bg-white p-6 rounded-2xl shadow-md">
+                        <span class="inline-block bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full mb-3" data-key="articleCategory3">قانوني</span>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3" data-key="articleTitle3">أهمية الترجمة الدقيقة في القضايا القانونية</h4>
+                        <p class="text-gray-600 mb-4" data-key="articleDesc3">كيف يمكن لخطأ صغير في الترجمة أن يغير نتيجة قضية كاملة؟ تعرف على أهمية الدقة في الترجمة القانونية.</p>
+                        <a href="#" class="text-emerald-600 font-bold hover:text-emerald-700 flex items-center">
+                            <span data-key="readArticle">قراءة المقال</span> 
+                            <i class="fas fa-arrow-left ml-2 rtl:mr-2 animate-pulse"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="article-card bg-white p-6 rounded-2xl shadow-md">
+                        <span class="inline-block bg-orange-100 text-orange-600 text-sm font-bold px-3 py-1 rounded-full mb-3" data-key="articleCategory4">إجراءات</span>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3" data-key="articleTitle4">الخطوات الكاملة لتوثيق المستندات في فنلندا</h4>
+                        <p class="text-gray-600 mb-4" data-key="articleDesc4">دليل تفصيلي للإجراءات المطلوبة لتوثيق المستندات الرسمية في فنلندا، مع نصائح لتجنب الأخطاء الشائعة.</p>
+                        <a href="#" class="text-emerald-600 font-bold hover:text-emerald-700 flex items-center">
+                            <span data-key="readArticle">قراءة المقال</span> 
+                            <i class="fas fa-arrow-left ml-2 rtl:mr-2 animate-pulse"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأسئلة الشائعة -->
+    <section id="faq" class="py-20 bg-gradient-to-br from-gray-50 to-emerald-50">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-emerald-600" data-key="faqTitle">الأسئلة الشائعة</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="faqSubtitle">إجابات على أكثر الأسئلة شيوعاً حول خدماتنا</p>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- سؤال 1 -->
+                <div class="faq-item bg-white" data-aos="fade-up" data-aos-delay="100">
+                    <button class="faq-question w-full text-left p-6 text-xl font-semibold text-gray-800 hover:text-emerald-600 flex justify-between items-center bg-gray-50">
+                        <span data-key="faqQ1">ما هي مدة إنجاز الترجمة المعتمدة؟</span>
+                        <i class="fas fa-chevron-down text-emerald-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-6 pt-0 text-gray-600 hidden">
+                        <p data-key="faqA1P1">مدة إنجاز الترجمة المعتمدة تعتمد على نوع المستند وعدد الصفحات. بشكل عام:</p>
+                        <ul class="list-disc list-inside mt-3 space-y-2">
+                            <li><span data-key="faqA1Item1">المستندات الصغيرة (1-5 صفحات): 1-2 أيام عمل</span></li>
+                            <li><span data-key="faqA1Item2">المستندات المتوسطة (6-20 صفحة): 3-5 أيام عمل</span></li>
+                            <li><span data-key="faqA1Item3">المستندات الكبيرة (أكثر من 20 صفحة): 7-10 أيام عمل</span></li>
+                        </ul>
+                        <p class="mt-4" data-key="faqA1P2">نقدم خدمة عاجلة لمستندات الطوارئ بزيادة 50% على السعر الأساسي، حيث يمكننا إنجاز الترجمة في غضون 24 ساعة.</p>
+                    </div>
+                </div>
+                
+                <!-- سؤال 2 -->
+                <div class="faq-item bg-white" data-aos="fade-up" data-aos-delay="200">
+                    <button class="faq-question w-full text-left p-6 text-xl font-semibold text-gray-800 hover:text-emerald-600 flex justify-between items-center bg-gray-50">
+                        <span data-key="faqQ2">ما هي المستندات المطلوبة لطلب الترجمة؟</span>
+                        <i class="fas fa-chevron-down text-emerald-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-6 pt-0 text-gray-600 hidden">
+                        <p data-key="faqA2P1">لطلب الترجمة المعتمدة، نحتاج إلى:</p>
+                        <ul class="list-disc list-inside mt-3 space-y-2">
+                            <li><span data-key="faqA2Item1">نسخة واضحة من المستند الأصلي (سواءً ورقية أو رقمية)</span></li>
+                            <li><span data-key="faqA2Item2">صورة من بطاقة الهوية أو جواز السفر</span></li>
+                            <li><span data-key="faqA2Item3">تفاصيل الاتصال الكاملة (بريد إلكتروني، هاتف، عنوان)</span></li>
+                        </ul>
+                        <p class="mt-4" data-key="faqA2P2">بالنسبة للمستندات الرسمية مثل الشهادات الدراسية، يفضل تقديم النسخ الأصلية للتأكد من صحتها. يمكنك إرسال المستندات إلكترونياً عبر نظامنا الآمن أو زيارة مكتبنا في هلسنكي.</p>
+                    </div>
+                </div>
+                
+                <!-- سؤال 3 -->
+                <div class="faq-item bg-white" data-aos="fade-up" data-aos-delay="300">
+                    <button class="faq-question w-full text-left p-6 text-xl font-semibold text-gray-800 hover:text-emerald-600 flex justify-between items-center bg-gray-50">
+                        <span data-key="faqQ3">هل تقدمون استشارات قانونية عبر الإنترنت؟</span>
+                        <i class="fas fa-chevron-down text-emerald-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-6 pt-0 text-gray-600 hidden">
+                        <p data-key="faqA3P1">نعم، نقدم استشارات قانونية عبر الإنترنت من خلال:</p>
+                        <ul class="list-disc list-inside mt-3 space-y-2">
+                            <li><span data-key="faqA3Item1">مكالمات الفيديو (Zoom، Google Meet)</span></li>
+                            <li><span data-key="faqA3Item2">المكالمات الهاتفية</span></li>
+                            <li><span data-key="faqA3Item3">البريد الإلكتروني</span></li>
+                            <li><span data-key="faqA3Item4">منصتنا الخاصة عبر الإنترنت</span></li>
+                        </ul>
+                        <p class="mt-4" data-key="faqA3P2">يمكنك حجز موعد مسبق للاستشارة عبر موقعنا أو عن طريق الاتصال بنا مباشرة. نقدم استشارات قانونية في مجالات الهجرة، العقارات، قانون العمل، والتجارة الدولية.</p>
+                    </div>
+                </div>
+                
+                <!-- سؤال 4 -->
+                <div class="faq-item bg-white" data-aos="fade-up" data-aos-delay="400">
+                    <button class="faq-question w-full text-left p-6 text-xl font-semibold text-gray-800 hover:text-emerald-600 flex justify-between items-center bg-gray-50">
+                        <span data-key="faqQ4">كيف يمكنني التأكد من أن الترجمة معتمدة رسمياً؟</span>
+                        <i class="fas fa-chevron-down text-emerald-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-6 pt-0 text-gray-600 hidden">
+                        <p data-key="faqA4P1">الترجمة المعتمدة من مركز ممكن تحمل:</p>
+                        <ul class="list-disc list-inside mt-3 space-y-2">
+                            <li><span data-key="faqA4Item1">ختم المكتب الرسمي</span></li>
+                            <li><span data-key="faqA4Item2">توقيع المترجم المعتمد</span></li>
+                            <li><span data-key="faqA4Item3">رقم تسجيل فريد يمكن التحقق منه</span></li>
+                            <li><span data-key="faqA4Item4">تاريخ الإصدار</span></li>
+                        </ul>
+                        <p class="mt-4" data-key="faqA4P2">يمكنك التحقق من صحة الترجمة عن طريق مسح الرمز QR الموجود على المستند أو الاتصال بنا مباشرة. كما يمكنك التحقق من اعتماد المترجم عبر سجل المترجمين المعتمدين لدى وزارة العدل الفنلندية.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم فريق العمل -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-emerald-600" data-key="teamTitle">فريقنا المحترف</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="teamSubtitle">خبراء في الترجمة والاستشارات القانونية بمعايير عالمية</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- عضو الفريق 1 -->
+                <div class="team-member bg-white text-center p-6" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="عضو فريق" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-emerald-200 object-cover">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2" data-key="teamMember1Name">محمد السيد</h3>
+                    <p class="text-emerald-600 font-bold mb-4" data-key="teamMember1Role">مدير المركز</p>
+                    <p class="text-gray-600 mb-6" data-key="teamMember1Desc">خبرة 15 عاماً في الترجمة القانونية والإدارية، حاصل على شهادة الترجمة المعتمدة من وزارة العدل الفنلندية.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <!-- عضو الفريق 2 -->
+                <div class="team-member bg-white text-center p-6" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="عضو فريق" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-emerald-200 object-cover">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2" data-key="teamMember2Name">سارة عبد الله</h3>
+                    <p class="text-emerald-600 font-bold mb-4" data-key="teamMember2Role">مستشارة قانونية</p>
+                    <p class="text-gray-600 mb-6" data-key="teamMember2Desc">محامية متخصصة في قانون الهجرة والعقارات، حاصلة على شهادة الماجستير في القانون الدولي من جامعة هلسنكي.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <!-- عضو الفريق 3 -->
+                <div class="team-member bg-white text-center p-6" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="عضو فريق" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-emerald-200 object-cover">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2" data-key="teamMember3Name">أحمد محمود</h3>
+                    <p class="text-emerald-600 font-bold mb-4" data-key="teamMember3Role">مترجم معتمد</p>
+                    <p class="text-gray-600 mb-6" data-key="teamMember3Desc">مترجم معتمد للغات العربية والفنلندية والإنجليزية، متخصص في الترجمات التقنية والقانونية بخبرة 10 سنوات.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <!-- عضو الفريق 4 -->
+                <div class="team-member bg-white text-center p-6" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="عضو فريق" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-emerald-200 object-cover">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2" data-key="teamMember4Name">فاطمة عمر</h3>
+                    <p class="text-emerald-600 font-bold mb-4" data-key="teamMember4Role">مديرة العلاقات العامة</p>
+                    <p class="text-gray-600 mb-6" data-key="teamMember4Desc">متخصصة في خدمة العملاء وإدارة العلاقات، حاصلة على شهادة في إدارة الأعمال من جامعة آلتو.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-emerald-600"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم العملاء -->
+    <section class="py-20 bg-gradient-to-r from-emerald-50 to-orange-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-emerald-600" data-key="testimonialsTitle">قال عنا عملاؤنا</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="testimonialsSubtitle">آراء عملائنا هي شهادتنا الحقيقية على جودة خدماتنا</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- رأي 1 -->
+                <div class="testimonial-card bg-white p-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <span class="text-gray-500 text-sm mr-2">(5.0)</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic" data-key="testimonial1Text">"استخدمت خدمات مركز ممكن لترجمة عقود العمل، كانت الدقة والسرعة مذهلة. فريق محترف يعرف ما يفعلونه ويعاملون العملاء باحترام كبير. أنصح الجميع بالتعامل معهم."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="عميل" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <div>
+                            <h4 class="font-bold text-gray-800" data-key="testimonial1Name">علي حسن</h4>
+                            <p class="text-sm text-gray-500" data-key="testimonial1Role">رجل أعمال - هلسنكي</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- رأي 2 -->
+                <div class="testimonial-card bg-white p-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <span class="text-gray-500 text-sm mr-2">(5.0)</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic" data-key="testimonial2Text">"الاستشارة القانونية التي حصلت عليها ساعدتني في حل مشكلة معقدة في إقامتي. شكراً لفريق مركز ممكن على النصيحة القيمة والمهنية. لقد وفرتم علي الكثير من الوقت والجهد."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="عميل" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <div>
+                            <h4 class="font-bold text-gray-800" data-key="testimonial2Name">نورا محمد</h4>
+                            <p class="text-sm text-gray-500" data-key="testimonial2Role">طالبة دكتوراه - تامبيري</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- رأي 3 -->
+                <div class="testimonial-card bg-white p-8" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center mb-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star-half-alt text-yellow-400"></i>
+                        </div>
+                        <span class="text-gray-500 text-sm mr-2">(4.5)</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic" data-key="testimonial3Text">"ترجمة المستندات كانت دقيقة وسريعة، لكنني تمنيت لو كانت الأسعار أكثر وضوحاً على الموقع. بشكل عام تجربة ممتازة وسأعود مرة أخرى. شكراً على المهنية والاحترافية."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="عميل" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <div>
+                            <h4 class="font-bold text-gray-800" data-key="testimonial3Name">يوسف أحمد</h4>
+                            <p class="text-sm text-gray-500" data-key="testimonial3Role">مهندس برمجيات - إسبو</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم اتصل بنا -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-emerald-600" data-key="contactTitle">تواصل معنا</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="contactSubtitle">نحن هنا للإجابة على استفساراتك وتقديم المساعدة</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- معلومات الاتصال -->
+                <div class="contact-gradient p-8 rounded-2xl shadow-lg" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold text-emerald-600 mb-6" data-key="contactInfoTitle">معلومات التواصل</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-emerald-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1" data-key="addressTitle">العنوان</h4>
+                                <p class="text-gray-600" data-key="addressText">شارع مانرهايمي، 5، هلسنكي، فنلندا</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone-alt text-emerald-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1" data-key="phoneTitle">الهاتف</h4>
+                                <p class="text-gray-600">
+                                    <a href="tel:+00358469449717" class="hover:text-emerald-600">00358469449717</a>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-emerald-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1" data-key="emailTitle">البريد الإلكتروني</h4>
+                                <p class="text-gray-600">
+                                    <a href="mailto:mumkin.office@gmail.com" class="hover:text-emerald-600">mumkin.office@gmail.com</a>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-clock text-emerald-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1" data-key="hoursTitle">ساعات العمل</h4>
+                                <p class="text-gray-600">
+                                    <span data-key="hoursWeekdays">الأحد - الخميس: 9 صباحاً - 5 مساءً</span><br>
+                                    <span data-key="hoursFriday">الجمعة: 10 صباحاً - 2 ظهراً</span><br>
+                                    <span data-key="hoursSaturday">السبت: عطلة</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- خريطة جوجل -->
+                    <div class="mt-8 rounded-xl overflow-hidden shadow-md">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1984.727320800888!2d24.934581315739088!3d60.16961938196748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46920bc796210691%3A0xcd4ebd843be2f763!2sHelsinki%2C%20Finland!5e0!3m2!1sen!2sus!4v1643029037120!5m2!1sen!2sus" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                
+                <!-- نموذج الاتصال -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold text-emerald-600 mb-6" data-key="contactFormTitle">أرسل رسالتك</h3>
+                    
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-bold mb-2" data-key="formNameLabel">الاسم الكامل</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 rounded-lg form-input" placeholder="ادخل اسمك" required data-key="formNamePlaceholder">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-700 font-bold mb-2" data-key="formEmailLabel">البريد الإلكتروني</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 rounded-lg form-input" placeholder="ادخل بريدك الإلكتروني" required data-key="formEmailPlaceholder">
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-gray-700 font-bold mb-2" data-key="formPhoneLabel">رقم الهاتف</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-3 rounded-lg form-input" placeholder="ادخل رقم هاتفك" required data-key="formPhonePlaceholder">
+                        </div>
+                        
+                        <div>
+                            <label for="service" class="block text-gray-700 font-bold mb-2" data-key="formServiceLabel">نوع الخدمة</label>
+                            <select id="service" class="w-full px-4 py-3 rounded-lg form-input" required>
+                                <option value="" data-key="formServiceOptionDefault">اختر الخدمة المطلوبة</option>
+                                <option value="translation" data-key="formServiceOption1">الترجمة المعتمدة</option>
+                                <option value="legal" data-key="formServiceOption2">استشارات قانونية</option>
+                                <option value="document" data-key="formServiceOption3">توثيق المستندات</option>
+                                <option value="other" data-key="formServiceOption4">خدمات أخرى</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 font-bold mb-2" data-key="formMessageLabel">الرسالة</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg form-input" placeholder="اكتب رسالتك هنا..." required data-key="formMessagePlaceholder"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 text-white font-bold py-4 px-6 rounded-full shadow-lg transition-all duration-300 flex justify-center items-center">
+                            <span id="submit-text" data-key="formSubmitBtn">إرسال الرسالة</span>
+                            <i class="fas fa-paper-plane ml-2 rtl:mr-2"></i>
+                            <i class="fas fa-spinner loading-spinner ml-2 hidden"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة (Footer) -->
+    <footer class="bg-gray-900 text-white py-12 rounded-t-xl shadow-inner">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- معلومات المركز -->
+                <div class="text-center md:text-right" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center justify-center md:justify-start mb-4">
+                        <div class="bg-emerald-600 rounded-full p-2 mr-3">
+                            <!-- تم تحديث مسار الصورة للإشارة إلى ملف محلي -->
+                            <img src="logo.png" alt="شعار مركز ممكن" class="h-10 w-10">
+                        </div>
+                        <span class="text-2xl font-bold text-white" data-key="footerLogoText">مركز <span class="text-orange-500">ممكن</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4" data-key="footerDescription">مركز متخصص في خدمات الترجمة المعتمدة والاستشارات القانونية بمعايير عالمية.</p>
+                    <!-- أيقونات التواصل الاجتماعي في التذييل -->
+                    <div class="social-icons flex justify-center md:justify-start space-x-4 rtl:space-x-reverse text-xl mb-4">
+                        <a href="#" class="text-gray-400 hover:text-orange-500"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-orange-500"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-orange-500"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-orange-500"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-orange-500"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- روابط سريعة -->
+                <div class="text-center md:text-right" data-aos="fade-up" data-aos-delay="200">
+                    <h4 class="text-xl font-bold mb-4 text-emerald-400" data-key="footerQuickLinksTitle">روابط سريعة</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors" data-key="navHome">الرئيسية</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors" data-key="navServices">خدماتنا</a></li>
+                        <li><a href="#news" class="text-gray-400 hover:text-white transition-colors" data-key="navNews">الأخبار</a></li>
+                        <li><a href="#articles" class="text-gray-400 hover:text-white transition-colors" data-key="navArticles">المقالات</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors" data-key="navFaq">الأسئلة الشائعة</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors" data-key="navContactBtn">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <!-- خدماتنا -->
+                <div class="text-center md:text-right" data-aos="fade-up" data-aos-delay="300">
+                    <h4 class="text-xl font-bold mb-4 text-emerald-400" data-key="footerOurServicesTitle">خدماتنا</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors" data-key="footerService1">الترجمة المعتمدة</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors" data-key="footerService2">الاستشارات القانونية</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors" data-key="footerService3">توثيق المستندات</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors" data-key="footerService4">ترجمة العقود</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors" data-key="footerService5">ترجمة الشهادات</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors" data-key="footerService6">خدمات الأعمال</a></li>
+                    </ul>
+                </div>
+                
+                <!-- معلومات الاتصال -->
+                <div class="text-center md:text-right" data-aos="fade-up" data-aos-delay="400">
+                    <h4 class="text-xl font-bold mb-4 text-emerald-400" data-key="footerContactTitle">تواصل معنا</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center justify-center md:justify-start">
+                            <i class="fas fa-map-marker-alt text-emerald-400 mr-2"></i>
+                            <span class="text-gray-400" data-key="addressText">شارع مانرهايمي، 5، هلسنكي</span>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start">
+                            <i class="fas fa-phone-alt text-emerald-400 mr-2"></i>
+                            <a href="tel:+00358469449717" class="text-gray-400 hover:text-white">00358469449717</a>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start">
+                            <i class="fas fa-envelope text-emerald-400 mr-2"></i>
+                            <a href="mailto:mumkin.office@gmail.com" class="text-gray-400 hover:text-white">mumkin.office@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center">
+                <p class="text-gray-400 text-sm mb-2" data-key="footerCopyright">© 2025 مركز ممكن - جميع الحقوق محفوظة</p>
+                <p class="text-gray-400 text-sm">Y-Tunnus 2757957-7</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر العودة للأعلى -->
+    <button id="scroll-to-top" class="bg-gradient-to-r from-emerald-600 to-green-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Object containing translations for different languages
+        const translations = {
+            'ar': {
+                pageTitle: 'مركز ممكن - الصفحة الرئيسية',
+                logoText: 'مركز ممكن',
+                navHome: 'الرئيسية',
+                navServices: 'خدماتنا',
+                navNews: 'الأخبار',
+                navArticles: 'المقالات',
+                navFaq: 'الأسئلة الشائعة',
+                navContactBtn: 'اتصل بنا',
+                heroBadge: 'المركز الأول في فنلندا',
+                heroTitlePart1: 'مركز',
+                heroTitlePart2: 'ممكن',
+                heroTitlePart3: 'لحول الترجمة والخدمات القانونية',
+                heroSubtitle: 'الخبرة والدقة والسرعة في خدمات الترجمة المعتمدة والاستشارات القانونية مع فريق من المحترفين يضمن لك حلولاً مثالية لجميع احتياجاتك',
+                heroDiscoverBtn: 'اكتشف خدماتنا',
+                heroBookBtn: 'احجز استشارة',
+                strength1: 'ترجمة معتمدة من وزارة العدل',
+                strength2: 'فريق محترف متعدد اللغات',
+                strength3: 'استشارات قانونية متخصصة',
+                strength4: 'سرية تامة في التعاملات',
+                strength5: 'دعم عملاء على مدار الساعة',
+                stat1Num: '+10,000',
+                stat1Text: 'مستند تمت ترجمته',
+                stat2Num: '+5,000',
+                stat2Text: 'عميل راضٍ عن خدماتنا',
+                stat3Num: '+15',
+                stat3Text: 'خبير في فريقنا',
+                stat4Num: '+20',
+                stat4Text: 'لغة متوفرة للترجمة',
+                servicesTitle: 'خدماتنا المتكاملة',
+                servicesSubtitle: 'نقدم مجموعة واسعة من خدمات الترجمة والاستشارات القانونية بمعايير عالمية تلبي جميع احتياجاتك',
+                service1Title: 'الترجمة المعتمدة',
+                service1Desc: 'ترجمة معتمدة من وزارة العدل لجميع المستندات الرسمية والوثائق القانونية مع ضمان الدقة والسرية التامة.',
+                service1Item1: 'شهادات الميلاد والزواج',
+                service1Item2: 'العقود والاتفاقيات',
+                service1Item3: 'المستندات المالية والقضائية',
+                service1Item4: 'الوثائق التعليمية',
+                service2Title: 'الاستشارات القانونية',
+                service2Desc: 'استشارات قانونية متخصصة في مجالات الهجرة، العقارات، التجارة الدولية، وحل النزاعات من قبل محامين متخصصين.',
+                service2Item1: 'استشارات هجرة وإقامة',
+                service2Item2: 'عقود العمل والتجارة',
+                service2Item3: 'تمثيل قانوني في المحاكم',
+                service2Item4: 'حل النزاعات التجارية',
+                service3Title: 'توثيق المستندات',
+                service3Desc: 'خدمات توثيق وإصدار مستندات رسمية معترف بها دولياً، مع ضمان السرعة والدقة في الإنجاز.',
+                service3Item1: 'توثيق التوقيعات',
+                service3Item2: 'تصديق المستندات الرسمية',
+                service3Item3: 'توثيق العقود والاتفاقيات',
+                service3Item4: 'توثيق الشهادات التعليمية',
+                learnMore: 'تعرف على المزيد',
+                newsTitle: 'آخر الأخبار والتحديثات',
+                newsSubtitle: 'تابع آخر المستجدات في عالم الترجمة والقوانين الدولية',
+                newsCategory1: 'ترجمة',
+                newsTitle1: 'تحديثات جديدة في متطلبات الترجمة المعتمدة',
+                newsDesc1: 'أعلنت وزارة العدل عن تحديثات جديدة في متطلبات الترجمة المعتمدة بدءاً من الشهر القادم، مما يسهل إجراءات الترجمة للمستندات الرسمية.',
+                newsCategory2: 'قانوني',
+                newsTitle2: 'تغييرات في قانون الهجرة الفنلندي للعام 2025',
+                newsDesc2: 'أصدرت الحكومة الفنلندية مجموعة من التعديلات على قانون الهجرة ستطبق اعتباراً من يوليو 2025، مما سيؤثر على إجراءات الهجرة والتأشيرات.',
+                newsCategory3: 'أحداث',
+                newsTitle3: 'مركز ممكن يشارك في معرض الخدمات القانونية الدولي',
+                newsDesc3: 'شارك مركز ممكن في فعاليات معرض الخدمات القانونية الدولي الذي أقيم في هلسنكي الأسبوع الماضي، حيث قدم أحدث حلول الترجمة القانونية.',
+                readMore: 'قراءة المزيد',
+                viewAllNews: 'تصفح جميع الأخبار',
+                articlesTitle: 'مقالات مختارة',
+                articlesSubtitle: 'اكتشف مقالاتنا المفيدة حول الترجمة والقوانين الدولية',
+                articleCategoryMain: 'دليل شامل',
+                articleTitleMain: 'دليل المبتدئين للترجمة القانونية المعتمدة',
+                articleDescMain: 'الترجمة القانونية تتطلب دقة عالية ومعرفة متخصصة. في هذا المقال نستعرض أهم النصائح والمتطلبات للحصول على ترجمة معتمدة صحيحة تفي بجميع الشروط القانونية.',
+                authorName1: 'محمد أحمد',
+                authorTitle1: 'مترجم قانوني معتمد',
+                readArticle: 'اقرأ المقال',
+                articleCategory2: 'نصائح',
+                articleTitle2: 'كيف تختار مكتب ترجمة معتمد؟',
+                articleDesc2: 'دليل شامل لاختيار أفضل مكتب ترجمة معتمد يناسب احتياجاتك ويضمن لك جودة ودقة الترجمة.',
+                articleCategory3: 'قانوني',
+                articleTitle3: 'أهمية الترجمة الدقيقة في القضايا القانونية',
+                articleDesc3: 'كيف يمكن لخطأ صغير في الترجمة أن يغير نتيجة قضية كاملة؟ تعرف على أهمية الدقة في الترجمة القانونية.',
+                articleCategory4: 'إجراءات',
+                articleTitle4: 'الخطوات الكاملة لتوثيق المستندات في فنلندا',
+                articleDesc4: 'دليل تفصيلي للإجراءات المطلوبة لتوثيق المستندات الرسمية في فنلندا، مع نصائح لتجنب الأخطاء الشائعة.',
+                faqTitle: 'الأسئلة الشائعة',
+                faqSubtitle: 'إجابات على أكثر الأسئلة شيوعاً حول خدماتنا',
+                faqQ1: 'ما هي مدة إنجاز الترجمة المعتمدة؟',
+                faqA1P1: 'مدة إنجاز الترجمة المعتمدة تعتمد على نوع المستند وعدد الصفحات. بشكل عام:',
+                faqA1Item1: 'المستندات الصغيرة (1-5 صفحات): 1-2 أيام عمل',
+                faqA1Item2: 'المستندات المتوسطة (6-20 صفحة): 3-5 أيام عمل',
+                faqA1Item3: 'المستندات الكبيرة (أكثر من 20 صفحة): 7-10 أيام عمل',
+                faqA1P2: 'نقدم خدمة عاجلة لمستندات الطوارئ بزيادة 50% على السعر الأساسي، حيث يمكننا إنجاز الترجمة في غضون 24 ساعة.',
+                faqQ2: 'ما هي المستندات المطلوبة لطلب الترجمة؟',
+                faqA2P1: 'لطلب الترجمة المعتمدة، نحتاج إلى:',
+                faqA2Item1: 'نسخة واضحة من المستند الأصلي (سواءً ورقية أو رقمية)',
+                faqA2Item2: 'صورة من بطاقة الهوية أو جواز السفر',
+                faqA2Item3: 'تفاصيل الاتصال الكاملة (بريد إلكتروني، هاتف، عنوان)',
+                faqA2P2: 'بالنسبة للمستندات الرسمية مثل الشهادات الدراسية، يفضل تقديم النسخ الأصلية للتأكد من صحتها. يمكنك إرسال المستندات إلكترونياً عبر نظامنا الآمن أو زيارة مكتبنا في هلسنكي.',
+                faqQ3: 'هل تقدمون استشارات قانونية عبر الإنترنت؟',
+                faqA3P1: 'نعم، نقدم استشارات قانونية عبر الإنترنت من خلال:',
+                faqA3Item1: 'مكالمات الفيديو (Zoom، Google Meet)',
+                faqA3Item2: 'المكالمات الهاتفية',
+                faqA3Item3: 'البريد الإلكتروني',
+                faqA3Item4: 'منصتنا الخاصة عبر الإنترنت',
+                faqA3P2: 'يمكنك حجز موعد مسبق للاستشارة عبر موقعنا أو عن طريق الاتصال بنا مباشرة. نقدم استشارات قانونية في مجالات الهجرة، العقارات، قانون العمل، والتجارة الدولية.',
+                faqQ4: 'كيف يمكنني التأكد من أن الترجمة معتمدة رسمياً؟',
+                faqA4P1: 'الترجمة المعتمدة من مركز ممكن تحمل:',
+                faqA4Item1: 'ختم المكتب الرسمي',
+                faqA4Item2: 'توقيع المترجم المعتمد',
+                faqA4Item3: 'رقم تسجيل فريد يمكن التحقق منه',
+                faqA4Item4: 'تاريخ الإصدار',
+                faqA4P2: 'يمكنك التحقق من صحة الترجمة عن طريق مسح الرمز QR الموجود على المستند أو الاتصال بنا مباشرة. كما يمكنك التحقق من اعتماد المترجم عبر سجل المترجمين المعتمدين لدى وزارة العدل الفنلندية.',
+                teamTitle: 'فريقنا المحترف',
+                teamSubtitle: 'خبراء في الترجمة والاستشارات القانونية بمعايير عالمية',
+                teamMember1Name: 'محمد السيد',
+                teamMember1Role: 'مدير المركز',
+                teamMember1Desc: 'خبرة 15 عاماً في الترجمة القانونية والإدارية، حاصل على شهادة الترجمة المعتمدة من وزارة العدل الفنلندية.',
+                teamMember2Name: 'سارة عبد الله',
+                teamMember2Role: 'مستشارة قانونية',
+                teamMember2Desc: 'محامية متخصصة في قانون الهجرة والعقارات، حاصلة على شهادة الماجستير في القانون الدولي من جامعة هلسنكي.',
+                teamMember3Name: 'أحمد محمود',
+                teamMember3Role: 'مترجم معتمد',
+                teamMember3Desc: 'مترجم معتمد للغات العربية والفنلندية والإنجليزية، متخصص في الترجمات التقنية والقانونية بخبرة 10 سنوات.',
+                teamMember4Name: 'فاطمة عمر',
+                teamMember4Role: 'مديرة العلاقات العامة',
+                teamMember4Desc: 'متخصصة في خدمة العملاء وإدارة العلاقات، حاصلة على شهادة في إدارة الأعمال من جامعة آلتو.',
+                testimonialsTitle: 'قال عنا عملاؤنا',
+                testimonialsSubtitle: 'آراء عملائنا هي شهادتنا الحقيقية على جودة خدماتنا',
+                testimonial1Text: '"استخدمت خدمات مركز ممكن لترجمة عقود العمل، كانت الدقة والسرعة مذهلة. فريق محترف يعرف ما يفعلونه ويعاملون العملاء باحترام كبير. أنصح الجميع بالتعامل معهم."',
+                testimonial1Name: 'علي حسن',
+                testimonial1Role: 'رجل أعمال - هلسنكي',
+                testimonial2Text: '"الاستشارة القانونية التي حصلت عليها ساعدتني في حل مشكلة معقدة في إقامتي. شكراً لفريق مركز ممكن على النصيحة القيمة والمهنية. لقد وفرتم علي الكثير من الوقت والجهد."',
+                testimonial2Name: 'نورا محمد',
+                testimonial2Role: 'طالبة دكتوراه - تامبيري',
+                testimonial3Text: '"ترجمة المستندات كانت دقيقة وسريعة، لكنني تمنيت لو كانت الأسعار أكثر وضوحاً على الموقع. بشكل عام تجربة ممتازة وسأعود مرة أخرى. شكراً على المهنية والاحترافية."',
+                testimonial3Name: 'يوسف أحمد',
+                testimonial3Role: 'مهندس برمجيات - إسبو',
+                contactTitle: 'تواصل معنا',
+                contactSubtitle: 'نحن هنا للإجابة على استفساراتك وتقديم المساعدة',
+                contactInfoTitle: 'معلومات التواصل',
+                addressTitle: 'العنوان',
+                addressText: 'شارع مانرهايمي، 5، هلسنكي، فنلندا',
+                phoneTitle: 'الهاتف',
+                emailTitle: 'البريد الإلكتروني',
+                hoursTitle: 'ساعات العمل',
+                hoursWeekdays: 'الأحد - الخميس: 9 صباحاً - 5 مساءً',
+                hoursFriday: 'الجمعة: 10 صباحاً - 2 ظهراً',
+                hoursSaturday: 'السبت: عطلة',
+                contactFormTitle: 'أرسل رسالتك',
+                formNameLabel: 'الاسم الكامل',
+                formNamePlaceholder: 'ادخل اسمك',
+                formEmailLabel: 'البريد الإلكتروني',
+                formEmailPlaceholder: 'ادخل بريدك الإلكتروني',
+                formPhoneLabel: 'رقم الهاتف',
+                formPhonePlaceholder: 'ادخل رقم هاتفك',
+                formServiceLabel: 'نوع الخدمة',
+                formServiceOptionDefault: 'اختر الخدمة المطلوبة',
+                formServiceOption1: 'الترجمة المعتمدة',
+                formServiceOption2: 'استشارات قانونية',
+                formServiceOption3: 'توثيق المستندات',
+                formServiceOption4: 'خدمات أخرى',
+                formMessageLabel: 'الرسالة',
+                formMessagePlaceholder: 'اكتب رسالتك هنا...',
+                formSubmitBtn: 'إرسال الرسالة',
+                formSubmitting: 'جاري الإرسال...',
+                formSentSuccess: 'تم الإرسال بنجاح!',
+                footerLogoText: 'مركز ممكن',
+                footerDescription: 'مركز متخصص في خدمات الترجمة المعتمدة والاستشارات القانونية بمعايير عالمية.',
+                footerQuickLinksTitle: 'روابط سريعة',
+                footerOurServicesTitle: 'خدماتنا',
+                footerService1: 'الترجمة المعتمدة',
+                footerService2: 'الاستشارات القانونية',
+                footerService3: 'توثيق المستندات',
+                footerService4: 'ترجمة العقود',
+                footerService5: 'ترجمة الشهادات',
+                footerService6: 'خدمات الأعمال',
+                footerContactTitle: 'تواصل معنا',
+                footerCopyright: '© 2025 مركز ممكن - جميع الحقوق محفوظة'
+            },
+            'en': {
+                pageTitle: 'Mumkin Center - Home Page',
+                logoText: 'Mumkin Center',
+                navHome: 'Home',
+                navServices: 'Services',
+                navNews: 'News',
+                navArticles: 'Articles',
+                navFaq: 'FAQ',
+                navContactBtn: 'Contact Us',
+                heroBadge: 'Leading Center in Finland',
+                heroTitlePart1: 'Mumkin',
+                heroTitlePart2: 'Center',
+                heroTitlePart3: 'for Translation and Legal Solutions',
+                heroSubtitle: 'Expertise, accuracy, and speed in certified translation services and legal consultations with a team of professionals ensuring optimal solutions for all your needs.',
+                heroDiscoverBtn: 'Discover Our Services',
+                heroBookBtn: 'Book a Consultation',
+                strength1: 'Certified by Ministry of Justice',
+                strength2: 'Professional Multilingual Team',
+                strength3: 'Specialized Legal Consultations',
+                strength4: 'Full Confidentiality in Dealings',
+                strength5: '24/7 Customer Support',
+                stat1Num: '+10,000',
+                stat1Text: 'Documents Translated',
+                stat2Num: '+5,000',
+                stat2Text: 'Satisfied Clients',
+                stat3Num: '+15',
+                stat3Text: 'Experts in Our Team',
+                stat4Num: '+20',
+                stat4Text: 'Languages Available',
+                servicesTitle: 'Our Integrated Services',
+                servicesSubtitle: 'We offer a wide range of translation and legal consultation services with international standards to meet all your needs.',
+                service1Title: 'Certified Translation',
+                service1Desc: 'Certified translation from the Ministry of Justice for all official documents and legal papers, ensuring accuracy and complete confidentiality.',
+                service1Item1: 'Birth and Marriage Certificates',
+                service1Item2: 'Contracts and Agreements',
+                service1Item3: 'Financial and Judicial Documents',
+                service1Item4: 'Educational Documents',
+                service2Title: 'Legal Consultations',
+                service2Desc: 'Specialized legal consultations in immigration, real estate, international trade, and dispute resolution by expert lawyers.',
+                service2Item1: 'Immigration and Residency Consultations',
+                service2Item2: 'Employment and Commercial Contracts',
+                service2Item3: 'Legal Representation in Courts',
+                service2Item4: 'Commercial Dispute Resolution',
+                service3Title: 'Document Authentication',
+                service3Desc: 'Authentication and issuance services for internationally recognized official documents, ensuring speed and accuracy in completion.',
+                service3Item1: 'Signature Authentication',
+                service3Item1: 'Signature Authentication',
+                service3Item2: 'Official Document Certification',
+                service3Item3: 'Contract and Agreement Authentication',
+                service3Item4: 'Educational Certificate Authentication',
+                learnMore: 'Learn More',
+                newsTitle: 'Latest News & Updates',
+                newsSubtitle: 'Follow the latest developments in the world of translation and international law.',
+                newsCategory1: 'Translation',
+                newsTitle1: 'New Updates on Certified Translation Requirements',
+                newsDesc1: 'The Ministry of Justice announced new updates to certified translation requirements starting next month, facilitating translation procedures for official documents.',
+                newsCategory2: 'Legal',
+                newsTitle2: 'Changes in Finnish Immigration Law for 2025',
+                newsDesc2: 'The Finnish government has issued a set of amendments to the immigration law to be applied starting July 2025, which will affect immigration procedures and visas.',
+                newsCategory3: 'Events',
+                newsTitle3: 'Mumkin Center Participates in International Legal Services Exhibition',
+                newsDesc3: 'Mumkin Center participated in the International Legal Services Exhibition held in Helsinki last week, where it presented the latest legal translation solutions.',
+                readMore: 'Read More',
+                viewAllNews: 'Browse All News',
+                articlesTitle: 'Selected Articles',
+                articlesSubtitle: 'Discover our useful articles on translation and international law.',
+                articleCategoryMain: 'Comprehensive Guide',
+                articleTitleMain: 'Beginner\'s Guide to Certified Legal Translation',
+                articleDescMain: 'Legal translation requires high accuracy and specialized knowledge. In this article, we review the most important tips and requirements for obtaining a correct certified translation that meets all legal conditions.',
+                authorName1: 'Mohamed Ahmed',
+                authorTitle1: 'Certified Legal Translator',
+                readArticle: 'Read Article',
+                articleCategory2: 'Tips',
+                articleTitle2: 'How to Choose a Certified Translation Office?',
+                articleDesc2: 'A comprehensive guide to choosing the best certified translation office that suits your needs and ensures the quality and accuracy of translation.',
+                articleCategory3: 'Legal',
+                articleTitle3: 'The Importance of Accurate Translation in Legal Cases',
+                articleDesc3: 'How can a small error in translation change the outcome of an entire case? Learn about the importance of accuracy in legal translation.',
+                articleCategory4: 'Procedures',
+                articleTitle4: 'Complete Steps for Document Authentication in Finland',
+                articleDesc4: 'A detailed guide to the procedures required for authenticating official documents in Finland, with tips to avoid common mistakes.',
+                faqTitle: 'Frequently Asked Questions',
+                faqSubtitle: 'Answers to the most common questions about our services',
+                faqQ1: 'What is the turnaround time for certified translation?',
+                faqA1P1: 'The turnaround time for certified translation depends on the type of document and number of pages. Generally:',
+                faqA1Item1: 'Small documents (1-5 pages): 1-2 business days',
+                faqA1Item2: 'Medium documents (6-20 pages): 3-5 business days',
+                faqA1Item3: 'Large documents (more than 20 pages): 7-10 business days',
+                faqA1P2: 'We offer an urgent service for emergency documents with a 50% surcharge, where we can complete the translation within 24 hours.',
+                faqQ2: 'What documents are required to request a translation?',
+                faqA2P1: 'To request certified translation, we need:',
+                faqA2Item1: 'A clear copy of the original document (either paper or digital)',
+                faqA2Item2: 'A copy of your ID card or passport',
+                faqA2Item3: 'Full contact details (email, phone, address)',
+                faqA2P2: 'For official documents such as academic certificates, it is preferable to provide original copies to ensure their authenticity. You can send documents electronically via our secure system or visit our office in Helsinki.',
+                faqQ3: 'Do you offer online legal consultations?',
+                faqA3P1: 'Yes, we offer online legal consultations via:',
+                faqA3Item1: 'Video calls (Zoom, Google Meet)',
+                faqA3Item2: 'Phone calls',
+                faqA3Item3: 'Email',
+                faqA3Item4: 'Our dedicated online platform',
+                faqA3P2: 'You can book an appointment in advance for a consultation via our website or by contacting us directly. We offer legal consultations in immigration, real estate, labor law, and international trade.',
+                faqQ4: 'How can I ensure the translation is officially certified?',
+                faqA4P1: 'Certified translations from Mumkin Center bear:',
+                faqA4Item1: 'Official office stamp',
+                faqA4Item2: 'Certified translator\'s signature',
+                faqA4Item3: 'Unique registration number that can be verified',
+                faqA4Item4: 'Issuance date',
+                faqA4P2: 'You can verify the authenticity of the translation by scanning the QR code on the document or by contacting us directly. You can also verify the translator\'s certification through the register of certified translators at the Finnish Ministry of Justice.',
+                teamTitle: 'Our Professional Team',
+                teamSubtitle: 'Experts in translation and legal consultations with international standards',
+                teamMember1Name: 'Mohamed Elsayed',
+                teamMember1Role: 'Center Manager',
+                teamMember1Desc: '15 years of experience in legal and administrative translation, holding a certified translation certificate from the Finnish Ministry of Justice.',
+                teamMember2Name: 'Sara Abdullah',
+                teamMember2Role: 'Legal Consultant',
+                teamMember2Desc: 'Lawyer specializing in immigration and real estate law, holding a Master\'s degree in International Law from the University of Helsinki.',
+                teamMember3Name: 'Ahmed Mahmoud',
+                teamMember3Role: 'Certified Translator',
+                teamMember3Desc: 'Certified translator for Arabic, Finnish, and English languages, specialized in technical and legal translations with 10 years of experience.',
+                teamMember4Name: 'Fatima Omar',
+                teamMember4Role: 'Public Relations Manager',
+                teamMember4Desc: 'Specialized in customer service and relations management, holding a degree in Business Administration from Aalto University.',
+                testimonialsTitle: 'What Our Clients Say',
+                testimonialsSubtitle: 'Our clients\' opinions are our true testimony to the quality of our services',
+                testimonial1Text: '"I used Mumkin Center\'s services for translating employment contracts, and the accuracy and speed were amazing. A professional team who knows what they\'re doing and treats clients with great respect. I recommend them to everyone."',
+                testimonial1Name: 'Ali Hassan',
+                testimonial1Role: 'Businessman - Helsinki',
+                testimonial2Text: '"The legal consultation I received helped me solve a complex issue with my residency. Thanks to the Mumkin Center team for their valuable and professional advice. You saved me a lot of time and effort."',
+                testimonial2Name: 'Noura Mohamed',
+                testimonial2Role: 'PhD Student - Tampere',
+                testimonial3Text: '"Document translation was accurate and fast, but I wished the prices were clearer on the website. Overall, an excellent experience and I will come back again. Thanks for the professionalism."',
+                testimonial3Name: 'Youssef Ahmed',
+                testimonial3Role: 'Software Engineer - Espoo',
+                contactTitle: 'Contact Us',
+                contactSubtitle: 'We are here to answer your inquiries and provide assistance',
+                contactInfoTitle: 'Contact Information',
+                addressTitle: 'Address',
+                addressText: 'Mannerheimintie, 5, Helsinki, Finland',
+                phoneTitle: 'Phone',
+                emailTitle: 'Email',
+                hoursTitle: 'Working Hours',
+                hoursWeekdays: 'Sunday - Thursday: 9 AM - 5 PM',
+                hoursFriday: 'Friday: 10 AM - 2 PM',
+                hoursSaturday: 'Saturday: Closed',
+                contactFormTitle: 'Send Your Message',
+                formNameLabel: 'Full Name',
+                formNamePlaceholder: 'Enter your name',
+                formEmailLabel: 'Email Address',
+                formEmailPlaceholder: 'Enter your email address',
+                formPhoneLabel: 'Phone Number',
+                formPhonePlaceholder: 'Enter your phone number',
+                formServiceLabel: 'Service Type',
+                formServiceOptionDefault: 'Select desired service',
+                formServiceOption1: 'Certified Translation',
+                formServiceOption2: 'Legal Consultations',
+                formServiceOption3: 'Document Authentication',
+                formServiceOption4: 'Other Services',
+                formMessageLabel: 'Message',
+                formMessagePlaceholder: 'Write your message here...',
+                formSubmitBtn: 'Send Message',
+                formSubmitting: 'Sending...',
+                formSentSuccess: 'Successfully sent!',
+                footerLogoText: 'Mumkin Center',
+                footerDescription: 'A specialized center for certified translation services and legal consultations with international standards.',
+                footerQuickLinksTitle: 'Quick Links',
+                footerOurServicesTitle: 'Our Services',
+                footerService1: 'Certified Translation',
+                footerService2: 'Legal Consultations',
+                footerService3: 'Document Authentication',
+                footerService4: 'Contract Translation',
+                footerService5: 'Certificate Translation',
+                footerService6: 'Business Services',
+                footerContactTitle: 'Contact Us',
+                footerCopyright: '© 2025 Mumkin Center - All rights reserved'
+            },
+            'fi': {
+                pageTitle: 'Mumkin Keskus - Etusivu',
+                logoText: 'Mumkin Keskus',
+                navHome: 'Etusivu',
+                navServices: 'Palvelut',
+                navNews: 'Uutiset',
+                navArticles: 'Artikkelit',
+                navFaq: 'UKK',
+                navContactBtn: 'Ota yhteyttä',
+                heroBadge: 'Johtava keskus Suomessa',
+                heroTitlePart1: 'Mumkin',
+                heroTitlePart2: 'Keskus',
+                heroTitlePart3: 'Käännös- ja lakipalveluratkaisut',
+                heroSubtitle: 'Asiantuntemusta, tarkkuutta ja nopeutta virallisissa käännöspalveluissa ja oikeudellisissa konsultaatioissa ammattilaisten tiimillä, joka takaa optimaaliset ratkaisut kaikkiin tarpeisiisi.',
+                heroDiscoverBtn: 'Tutustu palveluihimme',
+                heroBookBtn: 'Varaa konsultaatio',
+                strength1: 'Oikeusministeriön hyväksymä käännös',
+                strength2: 'Monikielinen ammattitaitoinen tiimi',
+                strength3: 'Erikoistuneet oikeudelliset konsultaatiot',
+                strength4: 'Täydellinen luottamuksellisuus asioinnissa',
+                strength5: 'Ympärivuorokautinen asiakastuki',
+                stat1Num: '+10 000',
+                stat1Text: 'Käännettyä asiakirjaa',
+                stat2Num: '+5 000',
+                stat2Text: 'Tyytyväistä asiakasta',
+                stat3Num: '+15',
+                stat3Text: 'Asiantuntijaa tiimissämme',
+                stat4Num: '+20',
+                stat4Text: 'Kääntökieliä saatavilla',
+                servicesTitle: 'Kattavat Palvelumme',
+                servicesSubtitle: 'Tarjoamme laajan valikoiman käännös- ja oikeudellisia konsultaatiopalveluita kansainvälisten standardien mukaisesti kaikkiin tarpeisiisi.',
+                service1Title: 'Virallinen Käännös',
+                service1Desc: 'Oikeusministeriön hyväksymä käännös kaikille virallisille asiakirjoille ja oikeudellisille papereille, varmistaen tarkkuuden ja täydellisen luottamuksellisuuden.',
+                service1Item1: 'Syntymä- ja vihkitodistukset',
+                service1Item2: 'Sopimukset ja sopimukset',
+                service1Item3: 'Taloudelliset ja oikeudelliset asiakirjat',
+                service1Item4: 'Koulutusasiakirjat',
+                service2Title: 'Oikeudelliset Konsultaatiot',
+                service2Desc: 'Erikoistuneet oikeudelliset konsultaatiot maahanmuuttoon, kiinteistöihin, kansainväliseen kauppaan ja riitojenratkaisuun erikoislakimiesten toimesta.',
+                service2Item1: 'Maahanmuutto- ja oleskelulupakonsultaatiot',
+                service2Item2: 'Työ- و kauppasopimukset',
+                service2Item3: 'Oikeudellinen edustus tuomioistuimissa',
+                service2Item4: 'Kaupallisten riitojen ratkaisu',
+                service3Title: 'Asiakirjojen Todennus',
+                service3Desc: 'Asiakirjojen todennus- ja myöntämispalvelut kansainvälisesti tunnustetuille virallisille asiakirjoille, varmistaen nopeuden ja tarkkuuden suorittamisessa.',
+                service3Item1: 'Allekirjoitusten todennus',
+                service3Item2: 'Virallisten asiakirjojen todistus',
+                service3Item3: 'Sopimusten ja sopimusten todennus',
+                service3Item4: 'Koulutustodistusten todennus',
+                learnMore: 'Lue lisää',
+                newsTitle: 'Viimeisimmät Uutiset ja Päivitykset',
+                newsSubtitle: 'Seuraa viimeisimpiä kehityksiä käännöksen ja kansainvälisen oikeuden maailmassa.',
+                newsCategory1: 'Käännös',
+                newsTitle1: 'Uusia päivityksiä virallisten käännösten vaatimuksiin',
+                newsDesc1: 'Oikeusministeriö ilmoitti uusista päivityksistä virallisten käännösten vaatimuksiin ensi kuusta alkaen, mikä helpottaa virallisten asiakirjojen käännösmenettelyjä.',
+                newsCategory2: 'Oikeudellinen',
+                newsTitle2: 'Muutoksia Suomen maahanmuuttolakiin vuodelle 2025',
+                newsDesc2: 'Suomen hallitus on antanut joukon maahanmuuttolakiin tehtäviä muutoksia, jotka tulevat voimaan heinäkuussa 2025 ja vaikuttavat maahanmuutto- ja viisumimenettelyihin.',
+                newsCategory3: 'Tapahtumat',
+                newsTitle3: 'Mumkin Keskus osallistuu kansainväliseen lakipalvelunäyttelyyn',
+                newsDesc3: 'Mumkin Keskus osallistui viime viikolla Helsingissä järjestettyyn kansainväliseen lakipalvelunäyttelyyn, jossa se esitteli uusimpia oikeudellisia käännösratkaisuja.',
+                readMore: 'Lue lisää',
+                viewAllNews: 'Selaa kaikkia uutisia',
+                articlesTitle: 'Valitut Artikkelit',
+                articlesSubtitle: 'Tutustu hyödyllisiin artikkeleihimme käännöksestä ja kansainvälisestä oikeudesta.',
+                articleCategoryMain: 'Kattava Opas',
+                articleTitleMain: 'Aloittelijan opas viralliseen lakikäännökseen',
+                articleDescMain: 'Lakikäännös vaatii suurta tarkkuutta ja erikoisosaamista. Tässä artikkelissa käymme läpi tärkeimmät vinkit ja vaatimukset oikean ja virallisen käännöksen saamiseksi, joka täyttää kaikki lain edellytykset.',
+                authorName1: 'Mohamed Ahmed',
+                authorTitle1: 'Virallinen lakikääntäjä',
+                readArticle: 'Lue artikkeli',
+                articleCategory2: 'Vinkit',
+                articleTitle2: 'Miten valita virallinen käännöstoimisto?',
+                articleDesc2: 'Kattava opas parhaan virallisen käännöstoimiston valintaan, joka sopii tarpeisiisi ja varmistaa käännöksen laadun ja tarkkuuden.',
+                articleCategory3: 'Oikeudellinen',
+                articleTitle3: 'Tarkan käännöksen merkitys oikeustapauksissa',
+                articleDesc3: 'Miten pieni virhe käännöksessä voi muuttaa koko tapauksen lopputuloksen? Tutustu tarkkuuden merkitykseen lakikäännöksessä.',
+                articleCategory4: 'Menettelyt',
+                articleTitle4: 'Kattavat vaiheet asiakirjojen todennukseen Suomessa',
+                articleDesc4: 'Yksityiskohtainen opas virallisten asiakirjojen todennusmenettelyihin Suomessa، vinkkeineen yleisten virheiden välttämiseksi.',
+                faqTitle: 'Usein Kysytyt Kysymykset',
+                faqSubtitle: 'Vastauksia yleisimpiin kysymyksiin palveluistamme',
+                faqQ1: 'Mikä on virallisen käännöksen toimitusaika?',
+                faqA1P1: 'Virallisen käännöksen toimitusaika riippuu asiakirjan tyypistä ja sivumäärästä. Yleisesti:',
+                faqA1Item1: 'Pienet asiakirjat (1-5 sivua): 1-2 työpäivää',
+                faqA1Item2: 'Keskikokoiset asiakirjat (6-20 sivua): 3-5 työpäivää',
+                faqA1Item3: 'Suuret asiakirjat (yli 20 sivua): 7-10 työpäivää',
+                faqA1P2: 'Tarjoamme kiireellisen palvelun hätätilanneasiakirjoille 50 % lisämaksulla, jolloin voimme suorittaa käännöksen 24 tunnin kuluessa.',
+                faqQ2: 'Mitä asiakirjoja tarvitaan käännöksen tilaamiseen?',
+                faqA2P1: 'Virallisen käännöksen tilaamiseen tarvitsemme:',
+                faqA2Item1: 'Selkeän kopion alkuperäisestä asiakirjasta (paperi tai digitaalinen)',
+                faqA2Item2: 'Kopion henkilökortista tai passista',
+                faqA2Item3: 'Täydelliset yhteystiedot (sähköposti, puhelin, osoite)',
+                faqA2P2: 'Virallisten asiakirjojen, kuten opintotodistusten, osalta on suositeltavaa toimittaa alkuperäiset kopiot niiden aitouden varmistamiseksi. Voit lähettää asiakirjat sähköisesti turvallisen järjestelmämme kautta tai vierailla toimistossamme Helsingissä.',
+                faqQ3: 'Tarjoatteko oikeudellisia konsultaatioita verkossa?',
+                faqA3P1: 'Kyllä, tarjoamme oikeudellisia konsultaatioita verkossa:',
+                faqA3Item1: 'Videopuhelut (Zoom, Google Meet)',
+                faqA3Item2: 'Puhelinneuvottelut',
+                faqA3Item3: 'Sähköposti',
+                faqA3Item4: 'Oma verkkopalvelumme',
+                faqA3P2: 'Voit varata ajan etukäteen konsultaatiota varten verkkosivustomme kautta tai ottamalla meihin suoraan yhteyttä. Tarjoamme oikeudellisia konsultaatioita maahanmuuttoon, kiinteistöihin, työlainsäädäntöön ja kansainväliseen kauppaan liittyvissä asioissa.',
+                faqQ4: 'Miten voin varmistaa käännöksen olevan virallisesti hyväksytty?',
+                faqA4P1: 'Mumkin Keskuksen virallisissa käännöksissä on:',
+                faqA4Item1: 'Virallinen toimiston leima',
+                faqA4Item2: 'Virallisen kääntäjän allekirjoitus',
+                faqA4Item3: 'Ainutlaatuinen rekisterinumero, joka voidaan tarkistaa',
+                faqA4Item4: 'Myöntämispäivämäärä',
+                faqA4P2: 'Voit tarkistaa käännöksen aitouden skannaamalla asiakirjassa olevan QR-koodin أو ottamalla meihin suoraan yhteyttä. كما يمكنك التحقق من اعتماد المترجم عبر سجل المترجمين المعتمدين لدى وزارة العدل الفنلندية.',
+                teamTitle: 'Ammattitaitoinen Tiimimme',
+                teamSubtitle: 'Asiantuntijoita käännöksissä ja oikeudellisissa konsultaatioissa kansainvälisten standardien mukaisesti',
+                teamMember1Name: 'Mohamed Elsayed',
+                teamMember1Role: 'Keskuksen johtaja',
+                teamMember1Desc: '15 vuoden kokemus oikeudellisesta ja hallinnollisesta käännöksestä, Suomen oikeusministeriön hyväksymä virallinen kääntäjän todistus.',
+                teamMember2Name: 'Sara Abdullah',
+                teamMember2Role: 'Lakikonsultti',
+                teamMember2Desc: 'Maahanmuutto- ja kiinteistölainsäädäntöön erikoistunut asianajaja, Master-tutkinto kansainvälisestä oikeudesta Helsingin yliopistosta.',
+                teamMember3Name: 'Ahmed Mahmoud',
+                teamMember3Role: 'Virallinen kääntäjä',
+                teamMember3Desc: 'Virallinen kääntäjä arabiaksi, suomeksi ja englanniksi, erikoistunut teknisiin ja oikeudellisiin käännöksiin 10 vuoden kokemuksella.',
+                teamMember4Name: 'Fatima Omar',
+                teamMember4Role: 'Suhteiden johtaja',
+                teamMember4Desc: 'Erikoistunut asiakaspalveluun ja suhteiden hallintaan, kauppatieteiden tutkinto Aalto-yliopistosta.',
+                testimonialsTitle: 'Mitä asiakkaamme sanovat',
+                testimonialsSubtitle: 'Asiakkaidemme mielipiteet ovat todellinen todistus palveluidemme laadusta',
+                testimonial1Text: '"Käytin Mumkin Keskuksen palveluita työsopimusten kääntämiseen, ja tarkkuus sekä nopeus olivat hämmästyttäviä. Ammattitaitoinen tiimi, joka tietää mitä tekee ja kohtelee asiakkaita suurella kunnioituksella. Suosittelen heitä kaikille."',
+                testimonial1Name: 'Ali Hassan',
+                testimonial1Name: 'Ali Hassan',
+                testimonial1Role: 'Liikemies - Helsinki',
+                testimonial2Text: '"Saamani oikeudellinen konsultaatio auttoi minua ratkaisemaan monimutkaisen oleskelulupaongelman. Kiitos Mumkin Keskuksen tiimille heidän arvokkaista ja ammattitaitoisista neuvoista. Säästitte minulta paljon aikaa ja vaivaa."',
+                testimonial2Name: 'Noura Mohamed',
+                testimonial2Role: 'Tohtoriopiskelija - Tampere',
+                testimonial3Text: '"Asiakirjakäännös oli tarkka ja nopea, mutta toivoin, että hinnat olisivat olleet selkeämpiä verkkosivustolla. Kaiken kaikkiaan erinomainen kokemus و palaan takaisin. Kiitos ammattitaidosta."',
+                testimonial3Name: 'Youssef Ahmed',
+                testimonial3Role: 'Ohjelmistoinsinööri - Espoo',
+                contactTitle: 'Ota yhteyttä',
+                contactSubtitle: 'Olemme täällä vastaamassa kyselyihisi ja tarjoamaan apua',
+                contactInfoTitle: 'Yhteystiedot',
+                addressTitle: 'Osoite',
+                addressText: 'Mannerheimintie, 5, Helsinki, Suomi',
+                phoneTitle: 'Puhelin',
+                emailTitle: 'Sähköposti',
+                hoursTitle: 'Työajat',
+                hoursWeekdays: 'Su - To: 9.00 - 17.00',
+                hoursFriday: 'Pe: 10.00 - 14.00',
+                hoursSaturday: 'La: Suljettu',
+                contactFormTitle: 'Lähetä viestisi',
+                formNameLabel: 'Koko nimi',
+                formNamePlaceholder: 'Anna nimesi',
+                formEmailLabel: 'Sähköpostiosoite',
+                formEmailPlaceholder: 'Anna sähköpostiosoitteesi',
+                formPhoneLabel: 'Puhelinnumero',
+                formPhonePlaceholder: 'Anna puhelinnumerosi',
+                formServiceLabel: 'Palvelun tyyppi',
+                formServiceOptionDefault: 'Valitse haluamasi palvelu',
+                formServiceOption1: 'Virallinen käännös',
+                formServiceOption2: 'Lakikonsultaatiot',
+                formServiceOption3: 'Asiakirjojen todennus',
+                formServiceOption4: 'Muut palvelut',
+                formMessageLabel: 'Viesti',
+                formMessagePlaceholder: 'Kirjoita viestisi tähän...',
+                formSubmitBtn: 'Lähetä viesti',
+                formSubmitting: 'Lähetetään...',
+                formSentSuccess: 'Lähetetty onnistuneesti!',
+                footerLogoText: 'Mumkin Keskus',
+                footerDescription: 'Erikoistunut keskus virallisiin käännöspalveluihin ja oikeudellisiin konsultaatioihin kansainvälisten standardien mukaisesti.',
+                footerQuickLinksTitle: 'Pikalinkit',
+                footerOurServicesTitle: 'Palvelumme',
+                footerService1: 'Virallinen käännös',
+                footerService2: 'Lakikonsultaatiot',
+                footerService3: 'Asiakirjojen todennus',
+                footerService4: 'Sopimusten käännös',
+                footerService5: 'Todistusten käännös',
+                footerService6: 'Liiketoimintapalvelut',
+                footerContactTitle: 'Ota yhteyttä',
+                footerCopyright: '© 2025 Mumkin Keskus - Kaikki oikeudet pidätetään'
+            }
+        };
+
+        // Function to update content based on selected language
+        function updateContent(lang) {
+            const elements = document.querySelectorAll('[data-key]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else if (element.tagName === 'OPTION') {
+                        element.textContent = translations[lang][key];
+                    }
+                    else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // Update page title separately if it has a data-key
+            const pageTitleElement = document.querySelector('title[data-key="pageTitle"]');
+            if (pageTitleElement && translations[lang] && translations[lang].pageTitle) {
+                pageTitleElement.textContent = translations[lang].pageTitle;
+            }
+
+            // Set HTML lang and dir attributes
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+            // Adjust specific RTL/LTR styles if necessary (e.g., social icons margin)
+            const socialIcons = document.querySelector('.social-icons');
+            if (socialIcons) {
+                if (lang === 'ar') {
+                    socialIcons.classList.add('rtl:space-x-reverse');
+                    socialIcons.classList.remove('space-x-4');
+                    socialIcons.classList.add('space-x-reverse'); // Ensure rtl effect
+                } else {
+                    socialIcons.classList.remove('rtl:space-x-reverse');
+                    socialIcons.classList.remove('space-x-reverse');
+                    socialIcons.classList.add('space-x-4'); // Ensure ltr effect
+                }
+            }
+            // Re-adjust for nav-active underline for LTR
+            const navActiveElement = document.querySelector('.nav-active');
+            if (navActiveElement) {
+                const afterStyle = document.createElement('style');
+                afterStyle.setAttribute('id', 'nav-active-style');
+                if (lang === 'ar') {
+                    afterStyle.textContent = '.nav-active:after { left: 50%; transform: translateX(-50%); }';
+                } else {
+                    afterStyle.textContent = '.nav-active:after { left: 0; transform: translateX(0); }';
+                }
+                document.head.appendChild(afterStyle);
+            }
+        }
+
+        // Initialize AOS library for animations
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                easing: 'ease-in-out'
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // FAQ accordion functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    answer.classList.toggle('hidden');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            });
+            
+            // Close mobile menu when a link is clicked
+            const mobileLinks = document.querySelectorAll('#mobile-menu a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Scroll-to-top button functionality
+            const scrollToTopButton = document.getElementById('scroll-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopButton.classList.add('show');
+                } else {
+                    scrollToTopButton.classList.remove('show');
+                }
+            });
+
+            scrollToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Scroll progress bar
+            const progressBar = document.getElementById('progress-bar');
+            
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.body.scrollHeight - window.innerHeight;
+                const progress = (window.scrollY / totalHeight) * 100;
+                progressBar.style.width = progress + '%';
+            });
+            
+            // Contact form submission simulation
+            const contactForm = document.getElementById('contact-form');
+            const submitText = document.getElementById('submit-text');
+            const spinner = document.querySelector('.loading-spinner');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading spinner
+                submitText.textContent = translations[document.documentElement.lang].formSubmitting;
+                spinner.classList.remove('hidden');
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    // Hide loading spinner
+                    spinner.classList.add('hidden');
+                    submitText.textContent = translations[document.documentElement.lang].formSentSuccess;
+                    
+                    // Reset form after 2 seconds
+                    setTimeout(() => {
+                        contactForm.reset();
+                        submitText.textContent = translations[document.documentElement.lang].formSubmitBtn;
+                    }, 2000);
+                }, 1500);
+            });
+            
+            // Highlight active section in navigation
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('header nav ul li a');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    // Adjusted for better scroll-snapping
+                    if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('nav-active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('nav-active');
+                    }
+                });
+            });
+
+            // Language switcher logic
+            const languageSelect = document.getElementById('language-select');
+
+            // Set initial language from localStorage or default to Arabic
+            const savedLang = localStorage.getItem('selectedLanguage') || 'ar';
+            languageSelect.value = savedLang;
+            updateContent(savedLang);
+
+            languageSelect.addEventListener('change', (event) => {
+                const newLang = event.target.value;
+                localStorage.setItem('selectedLanguage', newLang);
+                updateContent(newLang);
+            });
+        });
+    </script>
+</body>
+</html>
