@@ -1687,17 +1687,20 @@
                     socialIcons.classList.add('space-x-4'); // Ensure ltr effect
                 }
             }
-            // Re-adjust for nav-active underline for LTR
+            // Re-adjust for nav-active underline for LTR/RTL
             const navActiveElement = document.querySelector('.nav-active');
             if (navActiveElement) {
-                const afterStyle = document.createElement('style');
-                afterStyle.setAttribute('id', 'nav-active-style');
+                let afterStyle = document.getElementById('nav-active-style');
+                if (!afterStyle) {
+                    afterStyle = document.createElement('style');
+                    afterStyle.setAttribute('id', 'nav-active-style');
+                    document.head.appendChild(afterStyle);
+                }
                 if (lang === 'ar') {
                     afterStyle.textContent = '.nav-active:after { left: 50%; transform: translateX(-50%); }';
                 } else {
                     afterStyle.textContent = '.nav-active:after { left: 0; transform: translateX(0); }';
                 }
-                document.head.appendChild(afterStyle);
             }
         }
 
