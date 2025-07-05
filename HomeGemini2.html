@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوق العراق الشامل - الرئيسية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d5fa6;
+            --secondary: #f7b731;
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --success: #27ae60;
+            --info: #3498db;
+            --warning: #f39c12;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.2);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient-primary: linear-gradient(135deg, var(--primary), #0a4a8a);
+            --gradient-secondary: linear-gradient(135deg, var(--secondary), #e0a800);
+            --gradient-accent: linear-gradient(135deg, var(--accent), #c0392b);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Message Box Styles */
+        .message-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 10001;
+            display: none;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .message-box.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification-bar {
+            background: var(--gradient-secondary);
+            color: var(--dark);
+            text-align: center;
+            padding: 10px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .notification-bar .close-btn {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.1);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .notification-bar .close-btn:hover {
+            background: rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            background: var(--secondary);
+            z-index: 10000;
+            transition: width 0.3s ease;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(13, 95, 166, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+            overflow: hidden; /* For rounded corners */
+        }
+
+        .top-bar {
+            background-color: rgba(0, 0, 0, 0.15);
+            padding: 10px 0;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info span {
+            margin-left: 25px;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .contact-info span:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .contact-info i {
+            margin-left: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 18px;
+            transition: var(--transition);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons a:hover {
+            color: var(--secondary);
+            background: rgba(247, 183, 49, 0.2);
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .logo {
+            height: 70px;
+            width: 70px;
+            margin-left: 15px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background: white;
+            padding: 5px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 32px;
+            /* Changed color from var(--primary) to white */
+            color: white; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 700px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-bar input:focus {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-bar button {
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gradient-secondary);
+            border: none;
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(247, 183, 49, 0.3);
+        }
+
+        .search-bar button:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 5px 15px rgba(247, 183, 49, 0.4);
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: var(--box-shadow);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+
+        .search-suggestions.visible {
+            display: block;
+        }
+
+        .search-suggestions .suggestion-item {
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-suggestions .suggestion-item:hover {
+            background: var(--light);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .user-actions a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-actions a:hover {
+            color: var(--secondary);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .user-actions .btn {
+            background: var(--accent);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .user-actions .btn:hover {
+            background: #c0392b;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 30px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(13, 95, 166, 0.9), rgba(26, 26, 46, 0.8)), 
+                        url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3') no-repeat center center/cover;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(13, 95, 166, 0.3) 100%);
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .page-header h1 {
+            font-size: 48px; /* Increased font size */
+            margin-bottom: 20px; /* Increased margin */
+            font-weight: 800;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-header p {
+            font-size: 20px; /* Increased font size */
+            max-width: 700px; /* Increased max width */
+            margin: 0 auto 30px; /* Increased margin */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-header .btn-hero {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 35px; /* Larger padding */
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            background: var(--secondary);
+            color: var(--dark);
+            box-shadow: 0 8px 25px rgba(247, 183, 49, 0.4);
+            transition: var(--transition);
+            font-size: 18px; /* Larger font size */
+        }
+
+        .page-header .btn-hero:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: #e0a800;
+            box-shadow: 0 12px 30px rgba(247, 183, 49, 0.6);
+        }
+        
+        /* Fixed Side Button */
+        .fixed-add-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px; /* Adjusted to left for RTL */
+            background: var(--accent);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+            z-index: 9999;
+            transition: var(--transition);
+        }
+
+        .fixed-add-button:hover {
+            background: #c0392b;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(231, 76, 60, 0.7);
+        }
+
+
+        /* Main Content */
+        .main-content {
+            padding: 50px 0;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        /* About Us Section */
+        .about-us-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .about-us-section h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-us-section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .about-us-section p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--dark);
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .about-us-section .about-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .about-us-section .feature-item {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .about-us-section .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .about-us-section .feature-item i {
+            font-size: 40px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .about-us-section .feature-item h3 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .about-us-section .feature-item p {
+            font-size: 15px;
+            color: var(--gray);
+            margin-bottom: 0;
+        }
+
+        /* Section Header Reuseable */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 36px; /* Slightly larger for main sections */
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 80px; /* Wider underline */
+            height: 4px; /* Thicker underline */
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        /* Category Section */
+        .categories-section {
+            background: white;
+            padding: 60px 0;
+            margin-top: 50px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            padding: 20px 0;
+        }
+
+        .category-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            background: var(--primary);
+            color: white;
+        }
+
+        .category-card i {
+            font-size: 45px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .category-card:hover i {
+            color: var(--secondary);
+        }
+
+        .category-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        /* Featured Listings Section */
+        .featured-listings-section {
+            background: linear-gradient(135deg, #e0f2f7 0%, #d1e9f1 100%);
+            padding: 60px 0;
+            margin-top: 50px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .listings-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .listing-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        .listing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .listing-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .listing-content {
+            padding: 20px;
+        }
+
+        .listing-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .listing-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .listing-location, .listing-date {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .listing-location i, .listing-date i {
+            color: var(--primary);
+        }
+
+        /* Services Section (Modified to be more general info) */
+        .services-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 60px 0;
+            margin-top: 50px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(13, 95, 166, 0.3);
+        }
+        
+        .service-title {
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .service-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .service-link {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .service-link:hover {
+            color: #0a4a8a;
+            transform: translateX(-5px);
+        }
+
+        /* Negotiation Section */
+        .negotiation-section {
+            background: linear-gradient(135deg, rgba(13, 95, 166, 0.05), rgba(247, 183, 49, 0.05));
+            border-radius: var(--border-radius);
+            padding: 50px 0;
+            margin-top: 50px;
+        }
+        
+        .negotiation-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .negotiation-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-secondary);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px;
+        }
+        
+        .negotiation-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .negotiation-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .negotiation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .negotiation-card h4 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .negotiation-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .negotiation-btn {
+            display: inline-block;
+            background: var(--gradient-secondary);
+            color: var(--dark);
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: var(--transition);
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(247, 183, 49, 0.3);
+        }
+        
+        .negotiation-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(247, 183, 49, 0.4);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 50px;
+            margin-top: 50px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background: var(--light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-question i {
+            transition: var(--transition);
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px; /* Sufficient height for content */
+        }
+        
+        .faq-answer p {
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer ul {
+            padding-right: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer ul li {
+            margin-bottom: 8px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(13, 95, 166, 0.3) 100%);
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .cta-content p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-cta-primary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-cta-primary:hover {
+            background: #e0a800;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(247, 183, 49, 0.4);
+        }
+        
+        .btn-cta-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-cta-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Quick Links Section */
+        .quick-links-section {
+            background: var(--light);
+            padding: 40px 0;
+            margin-top: 50px;
+            border-top: 1px solid var(--light-gray);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .quick-links-section h2 {
+            font-size: 28px;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .quick-links-section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .quick-links-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .quick-link-item {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .quick-link-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(13, 95, 166, 0.2);
+        }
+
+        .quick-link-item i {
+            color: var(--secondary);
+            font-size: 20px;
+            transition: var(--transition);
+        }
+
+        .quick-link-item:hover i {
+            color: white;
+        }
+
+        /* Map Section */
+        .map-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-top: 50px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .map-container {
+            height: 400px;
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 10;
+            max-width: 300px;
+        }
+        
+        .map-overlay h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .map-overlay p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 80px;
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            overflow: hidden; /* For rounded corners */
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: var(--secondary);
+            font-size: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--secondary);
+            opacity: 1;
+            transform: translateX(5px);
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 15px;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 6px 0 0 6px;
+            outline: none;
+        }
+        
+        .newsletter-form button {
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 0 20px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 0 6px 6px 0;
+            transition: var(--transition);
+        }
+        
+        .newsletter-form button:hover {
+            background: #e0a800;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .negotiation-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted for smaller screens */
+            }
+
+            .categories-container, .listings-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .search-bar {
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .page-header h1 {
+                font-size: 38px; /* Adjusted for mobile */
+            }
+
+            .page-header p {
+                font-size: 17px;
+            }
+
+            .contact-info span {
+                display: none;
+            }
+
+            .contact-info span:first-child {
+                display: inline-flex;
+            }
+            
+            .about-us-section h2, .section-title {
+                font-size: 30px;
+            }
+            .about-us-section p {
+                font-size: 16px;
+            }
+            .about-us-section .about-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            .quick-link-item {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            .faq-section, .about-us-section, .map-section, .categories-section, .featured-listings-section, .cta-section {
+                padding: 25px;
+            }
+
+            .fixed-add-button {
+                left: 15px;
+                bottom: 15px;
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Animations */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Custom Message Box -->
+    <div class="message-box" id="messageBox"></div>
+
+    <div class="notification-bar">
+        <span>عروض خاصة اليوم! خصم يصل إلى 20% على الإعلانات المميزة <a href="#" style="color: var(--dark); font-weight: 700; margin-right: 10px;">انقر هنا</a></span>
+        <div class="close-btn" id="closeNotification">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+    
+    <header>
+        <div class="top-bar">
+            <div class="container top-bar-content">
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> 0770 123 4567</span>
+                    <span><i class="fas fa-envelope"></i> info@iraqmarket.com</span>
+                    <span><i class="fas fa-map-marker-alt"></i> بغداد، العراق</span>
+                </div>
+                <div class="social-icons">
+                    <a href="#" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="تويتر"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="إنستغرام"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="لينكد إن"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" title="تليغرام"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container main-header">
+            <a href="#" class="logo-container"> <!-- Added href to logo for homepage navigation -->
+                <img src="logo.png" onerror="this.onerror=null; this.src='https://placehold.co/70x70/0d5fa6/ffffff?text=LOGO';" alt="سوق العراق الشامل" class="logo">
+                <div class="logo-text">سوق العراق <span>الشامل</span></div>
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="ابحث عن سلعة، خدمة، وظيفة أو عقار..." id="searchInput">
+                <button onclick="performSearch()"><i class="fas fa-search"></i> بحث</button>
+                <div class="search-suggestions" id="searchSuggestions">
+                    <div class="suggestion-item">سيارات للبيع</div>
+                    <div class="suggestion-item">عقارات للايجار</div>
+                    <div class="suggestion-item">وظائف تكنولوجيا</div>
+                    <div class="suggestion-item">خدمات التصميم</div>
+                    <div class="suggestion-item">أجهزة إلكترونية</div>
+                    <div class="suggestion-item">ملابس أطفال</div>
+                    <div class="suggestion-item">خدمات منزلية</div>
+                    <div class="suggestion-item">معدات زراعية</div>
+                </div>
+            </div>
+            
+            <div class="user-actions">
+                <a href="#" id="loginBtn"><i class="fas fa-user"></i> تسجيل الدخول</a>
+                <a href="#" class="btn" id="registerBtn"><i class="fas fa-user-plus"></i> إنشاء حساب</a>
+            </div>
+        </div>
+        
+        <nav>
+            <div class="container">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul id="mainMenu">
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#categories-section"><i class="fas fa-th-large"></i> تصفح الفئات</a></li>
+                    <li><a href="#featured-listings-section"><i class="fas fa-star"></i> إعلانات مميزة</a></li>
+                    <li><a href="#"><i class="fas fa-store"></i> سوق البيع والشراء</a></li>
+                    <li><a href="#"><i class="fas fa-key"></i> سوق التأجير</a></li>
+                    <li><a href="#"><i class="fas fa-briefcase"></i> التوظيف</a></li>
+                    <li><a href="#"><i class="fas fa-comments"></i> غرفة المفاوضات</a></li>
+                    <li><a href="#"><i class="fas fa-tools"></i> الخدمات</a></li>
+                    <li><a href="#"><i class="fas fa-newspaper"></i> المقالات</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> عن المنصة</a></li>
+                    <li><a href="#"><i class="fas fa-headset"></i> المساعدة</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1>مرحباً بك في سوق العراق الشامل</h1>
+                <p>منصتك المتكاملة للبيع والشراء، التأجير، التوظيف والخدمات في جميع أنحاء العراق. ابدأ رحلتك الآن!</p>
+                <a href="#" class="btn-hero" id="postAdBtn"><i class="fas fa-plus-circle"></i> أضف إعلانك الأول مجاناً</a>
+            </div>
+        </div>
+    </section>
+    
+    <div class="container main-content">
+        <div class="content-wrapper">
+            <section class="categories-section" id="categories-section">
+                <div class="section-header">
+                    <h2 class="section-title">استكشف الفئات الرئيسية</h2>
+                    <p>ابحث عن ما تحتاجه أو اعرض ما تملك في الفئات المتنوعة</p>
+                </div>
+                <div class="categories-container">
+                    <a href="#" class="category-card fade-in-up">
+                        <i class="fas fa-car"></i>
+                        <h3>مركبات</h3>
+                    </a>
+                    <a href="#" class="category-card fade-in-up">
+                        <i class="fas fa-city"></i>
+                        <h3>عقارات</h3>
+                    </a>
+                    <a href="#" class="category-card fade-in-up">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>إلكترونيات</h3>
+                    </a>
+                    <a href="#" class="category-card fade-in-up">
+                        <i class="fas fa-couch"></i>
+                        <h3>أثاث ومنزل</h3>
+                    </a>
+                    <a href="#" class="category-card fade-in-up">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>وظائف</h3>
+                    </a>
+                    <a href="#" class="category-card fade-in-up">
+                        <i class="fas fa-wrench"></i>
+                        <h3>خدمات</h3>
+                    </a>
+                    <a href="#" class="category-card fade-in-up">
+                        <i class="fas fa-tshirt"></i>
+                        <h3>ملابس وموضة</h3>
+                    </a>
+                    <a href="#" class="category-card fade-in-up">
+                        <i class="fas fa-dog"></i>
+                        <h3>حيوانات أليفة</h3>
+                    </a>
+                </div>
+            </section>
+
+            <section class="featured-listings-section" id="featured-listings-section">
+                <div class="section-header">
+                    <h2 class="section-title">إعلانات مميزة اليوم</h2>
+                    <p>أحدث الصفقات والمنتجات المميزة التي قد تثير اهتمامك</p>
+                </div>
+                <div class="listings-container">
+                    <!-- Example Listing Card 1 -->
+                    <a href="#" class="listing-card fade-in-up">
+                        <img src="https://placehold.co/400x200/0d5fa6/ffffff?text=Used+Car" alt="سيارة تويوتا كامري">
+                        <div class="listing-content">
+                            <h3 class="listing-title">تويوتا كامري 2020 بحالة ممتازة</h3>
+                            <div class="listing-price">30,000,000 د.ع</div>
+                            <div class="listing-location"><i class="fas fa-map-marker-alt"></i> بغداد</div>
+                            <div class="listing-date"><i class="fas fa-clock"></i> قبل يومين</div>
+                        </div>
+                    </a>
+                    <!-- Example Listing Card 2 -->
+                    <a href="#" class="listing-card fade-in-up">
+                        <img src="https://placehold.co/400x200/f7b731/1a1a2e?text=Apartment" alt="شقة فاخرة للإيجار">
+                        <div class="listing-content">
+                            <h3 class="listing-title">شقة سكنية فاخرة للإيجار - المنصور</h3>
+                            <div class="listing-price">800,000 د.ع / شهرياً</div>
+                            <div class="listing-location"><i class="fas fa-map-marker-alt"></i> بغداد - المنصور</div>
+                            <div class="listing-date"><i class="fas fa-clock"></i> قبل 5 أيام</div>
+                        </div>
+                    </a>
+                    <!-- Example Listing Card 3 -->
+                    <a href="#" class="listing-card fade-in-up">
+                        <img src="https://placehold.co/400x200/e74c3c/ffffff?text=iPhone+14" alt="iPhone 14 Pro Max">
+                        <div class="listing-content">
+                            <h3 class="listing-title">آيفون 14 برو ماكس 256GB - جديد</h3>
+                            <div class="listing-price">1,800,000 د.ع</div>
+                            <div class="listing-location"><i class="fas fa-map-marker-alt"></i> أربيل</div>
+                            <div class="listing-date"><i class="fas fa-clock"></i> قبل 10 ساعات</div>
+                        </div>
+                    </a>
+                    <!-- Example Listing Card 4 -->
+                    <a href="#" class="listing-card fade-in-up">
+                        <img src="https://placehold.co/400x200/27ae60/ffffff?text=Laptop" alt="Laptop for Sale">
+                        <div class="listing-content">
+                            <h3 class="listing-title">لابتوب ألعاب بمعالج قوي وبطاقة شاشة RTX</h3>
+                            <div class="listing-price">1,250,000 د.ع</div>
+                            <div class="listing-location"><i class="fas fa-map-marker-alt"></i> البصرة</div>
+                            <div class="listing-date"><i class="fas fa-clock"></i> قبل يوم</div>
+                        </div>
+                    </a>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="#" class="btn-cta btn-cta-primary"><i class="fas fa-arrow-left"></i> تصفح جميع الإعلانات</a>
+                </div>
+            </section>
+
+            <section class="about-us-section">
+                <h2>نبذة عن منصة "سوق العراق الشامل"</h2>
+                <p>
+                    "سوق العراق الشامل" هي منصة رائدة ومتكاملة تهدف إلى تسهيل عمليات البيع والشراء، التأجير، والبحث عن الوظائف والخدمات المتنوعة في جميع أنحاء العراق. نحن نلتزم بتوفير بيئة آمنة وموثوقة للمستخدمين، سواء كانوا أفرادًا أو شركات، لتبادل السلع والخدمات بفعالية وكفاءة. نسعى جاهدين لدعم الاقتصاد المحلي وتعزيز التواصل التجاري بين أبناء الوطن، وذلك من خلال تقديم أدوات حديثة وميزات مبتكرة تلبي احتياجات الجميع. انضم إلينا اليوم وكن جزءًا من أكبر مجتمع تجاري في العراق.
+                </p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <i class="fas fa-handshake"></i>
+                        <h3>تجارة آمنة وموثوقة</h3>
+                        <p>نضمن لك بيئة آمنة لإجراء صفقاتك التجارية بكل ثقة.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>وصول واسع النطاق</h3>
+                        <p>صل إلى آلاف المشترين والبائعين من مختلف محافظات العراق.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-cogs"></i>
+                        <h3>أدوات مبتكرة</h3>
+                        <p>نوفر لك أحدث الأدوات والميزات لإدارة إعلاناتك بفعالية.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="services-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">خدماتنا الرئيسية</h2>
+                    </div>
+                    <div class="services-container">
+                        <div class="service-card fade-in-up">
+                            <div class="service-icon"><i class="fas fa-store"></i></div>
+                            <h3 class="service-title">سوق البيع والشراء</h3>
+                            <p class="service-description">تصفح آلاف المنتجات الجديدة والمستعملة، من الإلكترونيات والسيارات إلى العقارات والأزياء.</p>
+                            <a href="#" class="service-link">اكتشف المزيد <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                        <div class="service-card fade-in-up">
+                            <div class="service-icon"><i class="fas fa-key"></i></div>
+                            <h3 class="service-title">سوق التأجير</h3>
+                            <p class="service-description">اعثر على عقارات للإيجار، سيارات، معدات، وأي شيء آخر تحتاجه للإيجار.</p>
+                            <a href="#" class="service-link">تصفح الإعلانات <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                        <div class="service-card fade-in-up">
+                            <div class="service-icon"><i class="fas fa-briefcase"></i></div>
+                            <h3 class="service-title">التوظيف</h3>
+                            <p class="service-description">فرص عمل متنوعة في مختلف القطاعات، من الشركات الكبرى إلى المشاريع الناشئة.</p>
+                            <a href="#" class="service-link">ابحث عن وظيفة <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                        <div class="service-card fade-in-up">
+                            <div class="service-icon"><i class="fas fa-tools"></i></div>
+                            <h3 class="service-title">الخدمات</h3>
+                            <p class="service-description">اعلن عن خدماتك أو ابحث عن خبراء في مجالات مثل التصميم، الصيانة، التعليم وغيرها.</p>
+                            <a href="#" class="service-link">اعرض خدماتك <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="negotiation-section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="negotiation-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="section-title">غرفة المفاوضات</h3>
+                        <p>تفاوض مباشر مع البائعين للحصول على أفضل الأسعار والصفقات على المنتجات والخدمات التي تهمك</p>
+                    </div>
+                    
+                    <div class="negotiation-container">
+                        <div class="negotiation-card">
+                            <h4><i class="fas fa-hand-holding-usd"></i> أفضل الأسعار</h4>
+                            <p>احصل على عروض حصرية وتفاوض لخفض الأسعار بشكل مباشر مع البائعين.</p>
+                        </div>
+                        <div class="negotiation-card">
+                            <h4><i class="fas fa-shield-alt"></i> أمان وشفافية</h4>
+                            <p>جميع المفاوضات تتم ضمن بيئة آمنة وشفافة لضمان حقوق الجميع.</p>
+                        </div>
+                        <div class="negotiation-card">
+                            <h4><i class="fas fa-users"></i> مجتمع تفاعلي</h4>
+                            <p>تواصل مع مجتمع من التجار والمشترين ذوي الخبرة في مختلف المجالات.</p>
+                        </div>
+                        <div class="negotiation-card">
+                            <h4><i class="fas fa-clock"></i> توفير الوقت</h4>
+                            <p>اختصر وقت البحث والتفاوض من خلال التواصل المباشر مع البائعين.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="#" class="negotiation-btn"><i class="fas fa-arrow-left"></i> دخول الغرفة</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">الأسئلة الشائعة</h2>
+                    </div>
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                كيف يمكنني إضافة إعلان جديد؟
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>لإضافة إعلان جديد، يجب عليك أولاً تسجيل الدخول إلى حسابك. إذا لم يكن لديك حساب، يمكنك إنشاء واحد بسهولة. بعد تسجيل الدخول، اضغط على زر "إضافة إعلان" واتبع الخطوات لملء تفاصيل إعلانك ورفع الصور.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                هل يمكنني تعديل إعلاني بعد نشره؟
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>نعم، يمكنك تعديل إعلانك في أي وقت بعد نشره. اذهب إلى "إعلاناتي" في لوحة التحكم الخاصة بك، ثم اختر الإعلان الذي ترغب في تعديله وقم بإجراء التغييرات اللازمة.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                كيف يمكنني التواصل مع الدعم الفني للخدمات؟
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>نوفر عدة قنوات للتواصل مع فريق دعم الخدمات:</p>
+                                <ul>
+                                    <li>الدردشة المباشرة عبر الموقع (متاحة 24/7)</li>
+                                    <li>الاتصال على رقم الدعم: 0770 123 4567</li>
+                                    <li>البريد الإلكتروني: support@iraqmarket.com</li>
+                                    <li>زيارة مركز الدعم في بغداد: المنصور، شارع 14 رمضان</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                هل توجد رسوم لإضافة إعلاناتي؟
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>إضافة الإعلانات الأساسية مجانية تماماً. لكننا نقدم خيارات إعلانية مميزة بمقابل مالي، تتيح وصولاً أوسع وإمكانية ظهور الإعلان في الصفحة الرئيسية وأماكن مميزة.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                كيف يمكنني ضمان أمان معاملاتي؟
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>نوفر نظام ضمان للمعاملات عبر غرفة المفاوضات، حيث يمكنك إيداع المبلغ في حساب ضمان المنصة حتى استلام المنتج. كما ننصح دائماً بالتواصل مع البائعين الموثوقين الذين لديهم تقييمات عالية.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="map-section">
+                <div class="section-header">
+                    <h2 class="section-title">مواقعنا في العراق</h2>
+                    <p>تواجدنا في جميع المحافظات العراقية لتقديم أفضل الخدمات</p>
+                </div>
+                <div class="map-container">
+                    <!-- Placeholder for actual map embed, e.g., Google Maps iframe -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13702.66442084797!2d44.3314051!3d33.327572799999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x155781a7000305f5%3A0xc345f8f8b8a8b8a8!2z2KzZg9mF2LEg2KfZhNiz2YQg2KjYudi32Kkg2KfZhNin2YLYp9mE!5e0!3m2!1sen!2siq!4v1700000000000!5m2!1sen!2siq" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Map of Baghdad"
+                    ></iframe>
+                    <div class="map-overlay">
+                        <h4>مراكز الخدمة</h4>
+                        <p>بغداد - المنصور، شارع 14 رمضان</p>
+                        <p>البصرة - حي الجمهورية، شارع الكورنيش</p>
+                        <p>أربيل - شارع 60 متر، مجمع كردستان</p>
+                        <p>الموصل - شارع النجفي، بناية التجارة</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <div class="container">
+                    <div class="cta-content">
+                        <h2>جاهز لتحسين تجارتك وتنمية أعمالك؟</h2>
+                        <p>انضم إلى آلاف العملاء الذين استفادوا من خدمات سوق العراق الشامل لتحقيق أهدافهم التجارية</p>
+                        <div class="cta-buttons">
+                            <a href="#" class="btn-cta btn-cta-primary"><i class="fas fa-rocket"></i> ابدأ الآن</a>
+                            <a href="#" class="btn-cta btn-cta-outline"><i class="fas fa-headset"></i> تواصل معنا</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <section class="quick-links-section">
+        <div class="container">
+            <h2>روابط سريعة</h2>
+            <div class="quick-links-container">
+                <a href="#" class="quick-link-item"><i class="fas fa-tags"></i> عروض اليوم</a>
+                <a href="#" class="quick-link-item" id="addAdQuickLink"><i class="fas fa-plus-circle"></i> أضف إعلانك</a>
+                <a href="#" class="quick-link-item"><i class="fas fa-building"></i> عقارات للبيع</a>
+                <a href="#" class="quick-link-item"><i class="fas fa-car"></i> سيارات مستعملة</a>
+                <a href="#" class="quick-link-item"><i class="fas fa-mobile-alt"></i> أجهزة إلكترونية</a>
+                <a href="#" class="quick-link-item"><i class="fas fa-user-tie"></i> فرص عمل</a>
+                <a href="#" class="quick-link-item"><i class="fas fa-graduation-cap"></i> دورات تدريبية</a>
+                <a href="#" class="quick-link-item"><i class="fas fa-tshirt"></i> ملابس وأزياء</a>
+                <a href="#" class="quick-link-item"><i class="fas fa-home"></i> أثاث منزلي</a>
+                <a href="#" class="quick-link-item"><i class="fas fa-question-circle"></i> مساعدة</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="#"><i class="fas fa-store"></i> سوق البيع والشراء</a></li>
+                        <li><a href="#"><i class="fas fa-briefcase"></i> الوظائف</a></li>
+                        <li><a href="#"><i class="fas fa-tools"></i> الخدمات</a></li>
+                        <li><a href="#"><i class="fas fa-info-circle"></i> عن المنصة</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>خدماتنا</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-bullhorn"></i> ترويج الإعلانات</a></li>
+                        <li><a href="#"><i class="fas fa-camera"></i> خدمات التصوير</a></li>
+                        <li><a href="#"><i class="fas fa-id-card"></i> التحقق من الهوية</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> حملات تسويقية</a></li>
+                        <li><a href="#"><i class="fas fa-users"></i> خدمات التوظيف</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>الدعم والمساعدة</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-life-ring"></i> مركز المساعدة</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> شروط الاستخدام</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> تواصل معنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-phone"></i> 0770 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@iraqmarket.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> بغداد، العراق</a></li>
+                        <li>
+                            <div class="social-icons" style="margin-top: 15px;">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 سوق العراق الشامل. جميع الحقوق محفوظة. | تم التطوير بواسطة فريق التقنية العراقي</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed "Add your ad" button -->
+    <a href="#" class="fixed-add-button" id="fixedAddAdButton">
+        <i class="fas fa-plus"></i> أضف إعلانك
+    </a>
+
+    <script>
+        // Function to show a custom message box instead of alert()
+        function showMessage(message, duration = 3000) {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            messageBox.classList.add('show');
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+            }, duration);
+        }
+
+        // Progress bar functionality
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        });
+
+        // Close notification bar
+        document.getElementById('closeNotification').addEventListener('click', function() {
+            document.querySelector('.notification-bar').style.display = 'none';
+        });
+
+        // Search functionality
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            
+            if (query) {
+                showMessage(`البحث عن: "${query}" - سيتم عرض النتائج قريباً...`);
+            } else {
+                showMessage("الرجاء إدخال كلمة للبحث.", 2000);
+            }
+        }
+
+        // Search suggestions
+        const searchInput = document.getElementById('searchInput');
+        const searchSuggestions = document.getElementById('searchSuggestions');
+        
+        searchInput.addEventListener('focus', function() {
+            searchSuggestions.classList.add('visible');
+        });
+        
+        searchInput.addEventListener('blur', function() {
+            // Delay hiding to allow click on suggestion items
+            setTimeout(() => {
+                searchSuggestions.classList.remove('visible');
+            }, 200);
+        });
+        
+        searchInput.addEventListener('input', function() {
+            if (this.value.length > 0) {
+                // Filter suggestions based on input (simple client-client-side filter)
+                const searchTerm = this.value.toLowerCase();
+                const suggestionItems = document.querySelectorAll('.search-suggestions .suggestion-item');
+                let hasVisibleSuggestions = false;
+                suggestionItems.forEach(item => {
+                    if (item.textContent.toLowerCase().includes(searchTerm)) {
+                        item.style.display = 'block';
+                        hasVisibleSuggestions = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                if (hasVisibleSuggestions) {
+                    searchSuggestions.classList.add('visible');
+                } else {
+                    searchSuggestions.classList.remove('visible');
+                }
+            } else {
+                // Show all suggestions when input is empty
+                document.querySelectorAll('.search-suggestions .suggestion-item').forEach(item => {
+                    item.style.display = 'block';
+                });
+                searchSuggestions.classList.remove('visible');
+            }
+        });
+        
+        document.querySelectorAll('.suggestion-item').forEach(item => {
+            item.addEventListener('click', function() {
+                searchInput.value = this.textContent;
+                performSearch();
+            });
+        });
+
+        // Enter key search
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 15px 35px rgba(13, 95, 166, 0.4)';
+            } else {
+                header.style.boxShadow = '0 10px 30px rgba(13, 95, 166, 0.3)';
+            }
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mainMenu').classList.toggle('show');
+        });
+
+        // Post Ad button clicks
+        document.getElementById('postAdBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showMessage("صفحة إضافة الإعلان قيد الإنشاء. شكراً لاهتمامك!");
+        });
+
+        document.getElementById('fixedAddAdButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            showMessage("صفحة إضافة الإعلان قيد الإنشاء. شكراً لاهتمامك!");
+        });
+
+        document.getElementById('addAdQuickLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            showMessage("صفحة إضافة الإعلان قيد الإنشاء. شكراً لاهتمامك!");
+        });
+
+        // Initialize page animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in animation to elements
+            const elementsToAnimate = document.querySelectorAll('.service-card, .feature-item, .negotiation-card, .category-card, .listing-card');
+            elementsToAnimate.forEach(el => {
+                el.classList.add('fade-in-up');
+            });
+        });
+    </script>
+</body>
+</html>
