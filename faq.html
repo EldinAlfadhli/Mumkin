@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الأسئلة الشائعة - مركز ممكن</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #1c345a;
+      --accent-color: #1B5E20;
+      --light-gray: #f4f4f4;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--light-gray);
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: #fff; /* تغيير الخلفية إلى اللون الأبيض */
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #ddd;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-container img {
+      height: 50px;
+    }
+
+    .logo-container span {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--primary-color); /* تغيير اللون إلى اللون الأساسي */
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    nav a {
+      color: var(--primary-color); /* تغيير اللون إلى اللون الأساسي */
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav a i { font-size: 14px; }
+
+    .cta-button {
+      background: var(--accent-color);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      border: none;
+      transition: all 0.3s;
+    }
+
+    .cta-button:hover { background: #388e3c; }
+
+    .social-icons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-icons a {
+      color: var(--primary-color);
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover { color: var(--accent-color); }
+
+    .main-content {
+      padding-top: 120px; /* إضافة مسافة أعلى بعد الشريط العلوي */
+      padding: 60px 5%;
+    }
+
+    .main-content h1 {
+      color: var(--primary-color);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .faq-item {
+      background: white;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 20px;
+      cursor: pointer;
+    }
+
+    .faq-item h3 {
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+
+    .faq-item p {
+      font-size: 1rem;
+      color: #333;
+      display: none;
+    }
+
+    .faq-item.active p {
+      display: block;
+      margin-top: 10px;
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: white;
+      padding: 20px 5%;
+      text-align: center;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer p {
+      margin: 10px 0;
+    }
+
+    footer .social-icons {
+      justify-content: center;
+      gap: 15px;
+    }
+
+    footer .social-icons a {
+      color: white;
+      font-size: 20px;
+    }
+
+    footer .social-icons a:hover {
+      color: var(--accent-color);
+    }
+
+    footer img {
+      height: 40px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="شعار ممكن">
+      <span>مركز ممكن</span>
+    </div>
+    <nav>
+      <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+      <a href="services.html"><i class="fas fa-concierge-bell"></i> خدماتنا</a>
+      <a href="news.html"><i class="fas fa-newspaper"></i> الأخبار</a>
+      <a href="articles.html"><i class="fas fa-file-alt"></i> المقالات</a>
+      <a href="faq.html"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a>
+      <a href="about.html"><i class="fas fa-users"></i> من نحن</a>
+      <a href="contact.html" class="cta-button"><i class="fas fa-envelope"></i> اتصل بنا</a>
+    </nav>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-x-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h1>الأسئلة الشائعة</h1>
+    <div class="faq-item">
+      <h3>كيف يمكنني حجز خدمة الترجمة المعتمدة؟</h3>
+      <p>يمكنك تعبئة النموذج في صفحة "اتصل بنا" أو استخدام الدردشة المباشرة لتحديد نوع الوثيقة واللغة المطلوبة، وسنقوم بالتواصل معك فورًا.</p>
+    </div>
+    <div class="faq-item">
+      <h3>هل خدمات التوكيل تتم عن بُعد؟</h3>
+      <p>نعم، نوفر خدمة التوكيل الإلكتروني الكامل دون الحاجة إلى الحضور، مع التأكيد على التوثيق والسرية.</p>
+    </div>
+    <div class="faq-item">
+      <h3>كم تستغرق مدة إنجاز الترجمة؟</h3>
+      <p>يعتمد الوقت على عدد الصفحات ونوع النص، وعادةً ما يتم تسليم الترجمة خلال 24 إلى 72 ساعة.</p>
+    </div>
+    <div class="faq-item">
+      <h3>هل تقدمون استشارات قانونية مجانية؟</h3>
+      <p>نعم، الجلسة الأولى للاستشارة القانونية مجانية عبر الهاتف أو الإنترنت، وتهدف لفهم حالتك وتقديم التوجيه الأولي.</p>
+    </div>
+    <div class="faq-item">
+      <h3>ما وسائل الدفع المتاحة؟</h3>
+      <p>نقبل التحويل البنكي، الدفع الإلكتروني، وبطاقات الائتمان عبر نظام آمن وسهل الاستخدام.</p>
+    </div>
+  </main>
+
+  <section class="main-content">
+    <h2 style="text-align:center; color: var(--primary-color); margin-bottom: 20px;">هل لديك سؤال آخر؟</h2>
+    <form id="faqForm" style="background:white; padding: 30px; border-radius: 10px; max-width: 600px; margin: 0 auto; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+      <input type="text" id="name" placeholder="اسمك الكامل" required style="width:100%; margin-bottom:10px; padding:12px; border-radius:6px; border:1px solid #ccc;">
+      <input type="email" id="email" placeholder="بريدك الإلكتروني" required style="width:100%; margin-bottom:10px; padding:12px; border-radius:6px; border:1px solid #ccc;">
+      <textarea id="question" placeholder="سؤالك..." rows="4" required style="width:100%; margin-bottom:10px; padding:12px; border-radius:6px; border:1px solid #ccc;"></textarea>
+      <button type="submit" style="background: var(--accent-color); color:white; padding:12px 25px; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">إرسال</button>
+      <p id="responseMsg" style="margin-top:15px; color: green; display: none;">تم إرسال سؤالك بنجاح!</p>
+    </form>
+  </section>
+
+<footer>
+    <p>تواصل معنا عبر البريد: mumkin.office@gmail.com | الهاتف: 00358469449717</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-x-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>© 2025 مركز ممكن - جميع الحقوق محفوظة</p>
+    <p>Y-Tunnus 2757957-7</p>
+    <img src="logo.png" alt="شعار مركز ممكن">
+</footer>
+
+</body>
+</html>

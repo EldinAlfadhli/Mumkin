@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المقالات - مركز ممكن</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #1c345a;
+      --accent-color: #1B5E20;
+      --light-gray: #f4f4f4;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--light-gray);
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: #fff;
+      padding: 10px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      position: fixed;
+      width: 90%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-container img {
+      height: 50px;
+    }
+
+    .logo-container span {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    nav a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav a i { font-size: 14px; }
+
+    .cta-button {
+      background: var(--accent-color);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      border: none;
+      transition: all 0.3s;
+    }
+
+    .cta-button:hover { background: #388e3c; }
+
+    .social-icons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-icons a {
+      color: var(--primary-color);
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover { color: var(--accent-color); }
+
+    .main-content {
+      padding-top: 100px;
+      padding: 60px 5%;
+    }
+
+    .main-content h1 {
+      color: var(--primary-color);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .article-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .article-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .article-card p {
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .article-card a {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--accent-color);
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .article-card a:hover { text-decoration: underline; }
+
+    footer {
+      background: var(--primary-color);
+      color: white;
+      padding: 40px 5%;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    footer .social-icons a {
+      font-size: 20px;
+      margin: 0 10px;
+      color: white;
+      transition: opacity 0.3s;
+    }
+
+    footer .social-icons a:hover { opacity: 0.7; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="شعار ممكن">
+      <span>مركز ممكن</span>
+    </div>
+    <nav>
+      <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+      <a href="services.html"><i class="fas fa-concierge-bell"></i> خدماتنا</a>
+      <a href="news.html"><i class="fas fa-newspaper"></i> الأخبار</a>
+      <a href="articles.html"><i class="fas fa-file-alt"></i> المقالات</a>
+      <a href="faq.html"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a>
+      <a href="contact.html" class="cta-button"><i class="fas fa-envelope"></i> اتصل بنا</a>
+    </nav>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-x-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h1>مقالات قانونية ومترجمة</h1>
+    <div class="articles-grid">
+      <div class="article-card">
+        <h3>كيف تضمن ترجمة قانونية دقيقة لعقدك؟</h3>
+        <p>تعرف على أهم المعايير التي يجب اتباعها عند ترجمة العقود الرسمية لضمان سلامة المحتوى والالتزام القانوني.</p>
+        <a href="#">اقرأ المزيد</a>
+      </div>
+      <div class="article-card">
+        <h3>10 نصائح قانونية لكل رائد أعمال</h3>
+        <p>إذا كنت بصدد إطلاق مشروع جديد، لا تفوّت هذه النصائح القانونية التي تحمي فكرتك وتساعدك في تسجيل شركتك.</p>
+        <a href="#">اقرأ المزيد</a>
+      </div>
+      <div class="article-card">
+        <h3>الفرق بين الترجمة المعتمدة والموثقة</h3>
+        <p>مقال يوضح الفرق بين الترجمة المعتمدة والموثقة، ومتى تحتاج لكل نوع عند تقديم مستنداتك لجهات رسمية.</p>
+        <a href="#">اقرأ المزيد</a>
+      </div>
+      <div class="article-card">
+        <h3>أبرز الأخطاء القانونية الشائعة في العقود</h3>
+        <p>نرصد في هذا المقال أهم الأخطاء التي يقع فيها الأفراد عند صياغة أو توقيع العقود، وطرق تجنبها.</p>
+        <a href="#">اقرأ المزيد</a>
+      </div>
+    </div>
+  </main>
+
+ <footer>
+    <p>تواصل معنا عبر البريد: mumkin.office@gmail.com | الهاتف: 00358469449717</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-x-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p style="margin-top: 20px;">© 2025 مركز ممكن - جميع الحقوق محفوظة</p>
+<p style="margin-top: 20px;"> Y-Tunnus 2757957-7 </p>
+    <img src="logo.png" alt="شعار مركز ممكن" style="height: 40px; margin-top: 10px;">
+  </footer>
+</body>
+</html>
